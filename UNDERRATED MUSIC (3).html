@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>UNDERRATED MUSIC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#12100E;
+  --panel:#1B1714;
+  --panel-2:#221D19;
+  --line:#332C26;
+  --text:#F3EFE8;
+  --muted:#A69C8E;
+  --gold:#E8A33D;
+  --violet:#8C7CFF;
+  --pink:#FF6FA5;
+  --green:#5FBF8F;
+  --radius:16px;
+  --radius-sm:10px;
+}
+:root:not([data-theme="light"]){ }
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#F6F2EC; --panel:#FFFFFF; --panel-2:#F0EAE1; --line:#E3DACB; --text:#20180F; --muted:#7A6F5E;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#F6F2EC; --panel:#FFFFFF; --panel-2:#F0EAE1; --line:#E3DACB; --text:#20180F; --muted:#7A6F5E;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,.display{font-family:'Space Grotesk',system-ui,sans-serif;}
+button{font-family:inherit;}
+img{max-width:100%;}
+a{color:inherit;}
+::-webkit-scrollbar{width:0;height:0;}
+
+.frame{
+  width:100%;
+  max-width:430px;
+  min-height:100vh;
+  background:var(--panel);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  overflow-x:hidden;
+  border-left:1px solid var(--line);
+  border-right:1px solid var(--line);
+}
+@media (min-width:431px){
+  body{ padding:24px 0; }
+  .frame{ min-height:844px; border-radius:28px; box-shadow:0 30px 80px rgba(0,0,0,.35); overflow:hidden; }
+}
+
+/* ---------- shared bits ---------- */
+.screen{ flex:1; display:flex; flex-direction:column; min-height:100%; }
+.pad{ padding:20px; }
+.muted{ color:var(--muted); }
+.btn{
+  border:none; border-radius:999px; padding:14px 20px; font-weight:600; font-size:15px;
+  cursor:pointer; transition:transform .12s ease, opacity .15s ease; font-family:'Inter',sans-serif;
+}
+.btn:active{ transform:scale(.97); }
+.btn-primary{ background:var(--gold); color:#1B1409; }
+.btn-outline{ background:transparent; color:var(--text); border:1.5px solid var(--line); }
+.btn-block{ width:100%; }
+.field{ margin-bottom:14px; }
+.field label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; letter-spacing:.02em; }
+.field input, .field textarea, .field select{
+  width:100%; background:var(--panel-2); border:1.5px solid var(--line); color:var(--text);
+  border-radius:var(--radius-sm); padding:12px 14px; font-size:15px; font-family:inherit; resize:vertical;
+}
+.field input:focus, .field textarea:focus, .field select:focus{ outline:none; border-color:var(--gold); }
+.field.error input, .field.error textarea{ border-color:var(--pink); }
+.field .err-msg{ color:var(--pink); font-size:12px; margin-top:4px; display:none; }
+.field.error .err-msg{ display:block; }
+.pill-row{ display:flex; flex-wrap:wrap; gap:8px; }
+.pill{
+  border:1.5px solid var(--line); border-radius:999px; padding:9px 14px; font-size:13.5px; cursor:pointer;
+  background:var(--panel-2); color:var(--text); transition:.15s;
+}
+.pill.selected{ background:var(--gold); border-color:var(--gold); color:#1B1409; font-weight:600; }
+.upload-box{
+  border:1.5px dashed var(--line); border-radius:var(--radius); padding:18px; text-align:center;
+  cursor:pointer; background:var(--panel-2);
+}
+.upload-box:hover{ border-color:var(--gold); }
+.avatar{
+  width:56px; height:56px; border-radius:50%; object-fit:cover; background:var(--panel-2);
+  display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;
+}
+.avatar-sm{ width:38px; height:38px; font-size:16px; }
+.tag-writer{ color:var(--gold); }
+.tag-designer{ color:var(--violet); }
+.tag-both{ color:var(--green); }
+
+/* ---------- onboarding ---------- */
+.onb-hero{
+  flex:1; display:flex; flex-direction:column; justify-content:center; padding:36px 26px;
+  background:linear-gradient(160deg,var(--bg) 0%, var(--panel) 55%);
+}
+.onb-logo{ font-size:13px; letter-spacing:.16em; color:var(--gold); font-weight:600; margin-bottom:6px; }
+.onb-title{ font-size:34px; line-height:1.08; font-weight:700; margin:0 0 6px; }
+.onb-sub{ color:var(--muted); font-size:15px; margin:0 0 30px; max-width:320px; }
+.who-q{ font-size:22px; font-weight:700; margin-bottom:16px; }
+.who-opt{
+  display:flex; align-items:center; gap:14px; padding:16px; border-radius:var(--radius);
+  border:1.5px solid var(--line); background:var(--panel-2); margin-bottom:12px; cursor:pointer;
+  transition:.15s;
+}
+.who-opt:hover{ border-color:var(--gold); }
+.who-opt .ico{ width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.who-opt .body b{ display:block; font-size:15.5px; }
+.who-opt .body span{ font-size:12.5px; color:var(--muted); }
+
+/* ---------- deal overlay ---------- */
+.deal-overlay{
+  position:fixed; inset:0; background:rgba(0,0,0,.55); display:flex; align-items:flex-end;
+  justify-content:center; z-index:80;
+}
+.deal-sheet{
+  width:100%; max-width:430px; background:var(--panel); border-radius:22px 22px 0 0;
+  padding:26px 22px 30px; max-height:82vh; overflow-y:auto;
+  animation:slideUp .32s cubic-bezier(.16,1,.3,1);
+}
+@keyframes slideUp{ from{ transform:translateY(100%); } to{ transform:translateY(0); } }
+.deal-badge{
+  display:inline-flex; align-items:center; gap:6px; background:rgba(255,111,165,.14); color:var(--pink);
+  border-radius:999px; padding:6px 12px; font-size:12px; font-weight:700; margin-bottom:14px;
+}
+.deal-sheet h2{ font-size:22px; margin:0 0 12px; }
+.deal-sheet p{ font-size:14.5px; line-height:1.6; color:var(--muted); margin:0 0 12px; }
+.deal-sheet .close-x{
+  position:sticky; top:0; float:right; background:var(--panel-2); border:none; color:var(--text);
+  width:32px; height:32px; border-radius:50%; font-size:16px; cursor:pointer;
+}
+
+/* ---------- header / nav ---------- */
+.topbar{
+  display:flex; align-items:center; justify-content:space-between; padding:16px 18px 12px;
+  border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--panel); z-index:10;
+}
+.topbar .logo{ font-weight:700; font-size:17px; letter-spacing:.01em; }
+.topbar .logo span{ color:var(--gold); }
+.icon-btn{
+  background:var(--panel-2); border:1px solid var(--line); width:36px; height:36px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:var(--text);
+  position:relative;
+}
+.dot-badge::after{
+  content:''; position:absolute; top:5px; right:6px; width:7px; height:7px; border-radius:50%;
+  background:var(--pink); border:1.5px solid var(--panel);
+}
+
+.bottom-nav{
+  display:flex; border-top:1px solid var(--line); background:var(--panel); position:sticky; bottom:0; z-index:10;
+}
+.bottom-nav button{
+  flex:1; background:none; border:none; padding:10px 0 12px; display:flex; flex-direction:column;
+  align-items:center; gap:3px; color:var(--muted); cursor:pointer; font-size:10.5px; font-weight:600;
+}
+.bottom-nav button .ic{ font-size:19px; }
+.bottom-nav button.active{ color:var(--gold); }
+
+.content{ flex:1; overflow-y:auto; padding-bottom:6px; }
+
+/* ---------- feed ---------- */
+.section-title{ font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); padding:16px 18px 8px; font-weight:700; }
+.card{ border-bottom:1px solid var(--line); padding:14px 18px; }
+.card-head{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.card-head .names{ flex:1; min-width:0; }
+.card-head .names b{ font-size:14.5px; display:block; }
+.card-head .names .cat{ font-size:12px; color:var(--muted); }
+.work-btn{
+  border:1.5px solid var(--gold); color:var(--gold); background:transparent; border-radius:999px;
+  padding:7px 14px; font-size:12.5px; font-weight:700; cursor:pointer; flex-shrink:0; white-space:nowrap;
+}
+.work-btn.active{ background:var(--gold); color:#1B1409; }
+.msg-ic{ background:var(--panel-2); border:1px solid var(--line); border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; }
+.media-box{
+  border-radius:var(--radius); overflow:hidden; background:var(--panel-2); min-height:180px;
+  display:flex; align-items:center; justify-content:center; font-size:38px; position:relative; margin-bottom:10px;
+}
+.media-caption{ font-size:13.5px; line-height:1.5; }
+.media-caption b{ font-weight:600; }
+
+.suggest-row{ display:flex; align-items:center; gap:12px; padding:12px 18px; border-bottom:1px solid var(--line); }
+.suggest-row .names{ flex:1; }
+.suggest-row .names b{ font-size:14px; display:block; }
+.suggest-row .names .cat{ font-size:12px; color:var(--muted); }
+
+/* ---------- learn ---------- */
+.training-cta{
+  margin:14px 18px; border-radius:999px; background:linear-gradient(90deg,var(--violet),var(--pink));
+  color:#fff; text-align:center; padding:14px; font-weight:700; cursor:pointer; font-size:14.5px;
+}
+.lesson-card{ display:flex; gap:12px; padding:12px 18px; border-bottom:1px solid var(--line); cursor:pointer; }
+.lesson-thumb{ width:88px; height:64px; border-radius:10px; flex-shrink:0; background:var(--panel-2); display:flex; align-items:center; justify-content:center; font-size:22px; }
+.lesson-info b{ font-size:14px; display:block; margin-bottom:3px; }
+.lesson-info span{ font-size:12px; color:var(--muted); }
+.lock-chip{ font-size:10.5px; background:var(--panel-2); border:1px solid var(--line); border-radius:6px; padding:2px 6px; margin-top:5px; display:inline-block; }
+.lock-chip.free{ color:var(--green); border-color:var(--green); }
+.lock-chip.premium{ color:var(--gold); border-color:var(--gold); }
+
+.beat-row{ display:flex; align-items:center; gap:12px; padding:12px 18px; border-bottom:1px solid var(--line); }
+.beat-wave{ width:40px; height:40px; border-radius:10px; background:var(--panel-2); display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+.beat-info{ flex:1; min-width:0; }
+.beat-info b{ font-size:13.5px; display:block; }
+.beat-info span{ font-size:11.5px; color:var(--muted); }
+.status-chip{ font-size:10.5px; border-radius:6px; padding:3px 8px; font-weight:700; flex-shrink:0; }
+.status-chip.approved{ background:rgba(95,191,143,.15); color:var(--green); }
+.status-chip.pending{ background:rgba(232,163,61,.15); color:var(--gold); }
+.status-chip.rejected{ background:rgba(255,111,165,.15); color:var(--pink); }
+
+/* ---------- creation zone (reels-like) ---------- */
+.reel-card{ border-bottom:8px solid var(--bg); padding:0 0 14px; }
+.reel-media{ height:280px; background:var(--panel-2); display:flex; align-items:center; justify-content:center; font-size:44px; position:relative; }
+.reel-body{ padding:12px 18px 0; }
+.reel-actions{ display:flex; gap:10px; margin-top:10px; }
+.reel-actions button{ flex:1; }
+.comment-block{ padding:10px 18px 0; }
+.comment-line{ font-size:13px; margin-bottom:8px; line-height:1.5; }
+.comment-line b{ font-weight:600; margin-right:4px; }
+.deal-link{ color:var(--pink); font-weight:700; cursor:pointer; text-decoration:underline; }
+.comment-input-row{ display:flex; gap:8px; padding:10px 18px 16px; }
+.comment-input-row input{ flex:1; background:var(--panel-2); border:1.5px solid var(--line); border-radius:999px; padding:10px 14px; color:var(--text); font-size:13.5px; }
+.comment-input-row button{ background:var(--gold); border:none; border-radius:999px; padding:0 16px; font-weight:700; color:#1B1409; }
+
+/* ---------- me page ---------- */
+.me-header{ padding:22px 18px; display:flex; gap:16px; align-items:center; border-bottom:1px solid var(--line); }
+.me-header .avatar{ width:74px; height:74px; font-size:28px; }
+.me-name{ font-size:19px; font-weight:700; margin:0; }
+.me-cat{ font-size:13px; color:var(--muted); margin:2px 0 8px; }
+.me-cat.tag-writer{ color:var(--gold); font-weight:600; }
+.me-cat.tag-designer{ color:var(--violet); font-weight:600; }
+.me-cat.tag-both{ color:var(--green); font-weight:600; }
+.me-stats{ display:flex; gap:18px; padding:16px 18px; border-bottom:1px solid var(--line); }
+.me-stat b{ font-size:18px; display:block; }
+.me-stat span{ font-size:11.5px; color:var(--muted); }
+.me-section{ padding:16px 18px; border-bottom:1px solid var(--line); }
+.me-section h4{ font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:0 0 10px; }
+.info-row{ display:flex; justify-content:space-between; font-size:13.5px; padding:6px 0; border-bottom:1px solid var(--line); }
+.info-row:last-child{ border-bottom:none; }
+.info-row span:first-child{ color:var(--muted); }
+.work-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; }
+.work-cell{ aspect-ratio:1; background:var(--panel-2); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:20px; }
+.admin-toggle{ display:flex; align-items:center; justify-content:space-between; padding:10px 0; font-size:13px; }
+.switch{ width:40px; height:22px; border-radius:999px; background:var(--line); position:relative; cursor:pointer; flex-shrink:0; }
+.switch.on{ background:var(--gold); }
+.switch .knob{ width:18px; height:18px; border-radius:50%; background:#fff; position:absolute; top:2px; left:2px; transition:.15s; }
+.switch.on .knob{ left:20px; }
+.reset-link{ color:var(--pink); font-size:12.5px; text-align:center; padding:18px; cursor:pointer; }
+
+/* ---------- messages ---------- */
+.chat-row{ display:flex; align-items:center; gap:12px; padding:12px 18px; border-bottom:1px solid var(--line); cursor:pointer; }
+.chat-row .names{ flex:1; min-width:0; }
+.chat-row .names b{ font-size:14px; display:block; }
+.chat-row .names .last{ font-size:12.5px; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.chat-time{ font-size:11px; color:var(--muted); flex-shrink:0; }
+
+.chat-screen{ display:flex; flex-direction:column; height:100%; }
+.chat-header{ display:flex; align-items:center; gap:10px; padding:14px 16px; border-bottom:1px solid var(--line); }
+.chat-header b{ font-size:15px; }
+.chat-body{ flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px; }
+.bubble{ max-width:78%; padding:10px 14px; border-radius:16px; font-size:13.5px; line-height:1.4; }
+.bubble.me{ align-self:flex-end; background:var(--gold); color:#1B1409; border-bottom-right-radius:4px; }
+.bubble.them{ align-self:flex-start; background:var(--panel-2); border-bottom-left-radius:4px; }
+.chat-input-row{ display:flex; gap:8px; padding:12px 16px; border-top:1px solid var(--line); }
+.chat-input-row input{ flex:1; background:var(--panel-2); border:1.5px solid var(--line); border-radius:999px; padding:11px 15px; color:var(--text); font-size:14px; }
+.chat-input-row button{ background:var(--gold); border:none; border-radius:50%; width:40px; height:40px; font-size:16px; color:#1B1409; cursor:pointer; }
+
+.empty{ padding:50px 24px; text-align:center; color:var(--muted); font-size:13.5px; }
+.back-row{ display:flex; align-items:center; gap:10px; padding:16px 18px 4px; }
+.back-btn{ background:var(--panel-2); border:1px solid var(--line); border-radius:50%; width:34px; height:34px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+
+.toast{
+  position:fixed; bottom:90px; left:50%; transform:translateX(-50%); background:var(--panel-2);
+  border:1px solid var(--line); color:var(--text); padding:11px 18px; border-radius:999px; font-size:13px;
+  z-index:90; box-shadow:0 8px 24px rgba(0,0,0,.3); opacity:0; transition:opacity .25s;
+}
+.toast.show{ opacity:1; }
+
+/* ===== Premium 3D layer (additive, visual only) ===== */
+.frame{ isolation:isolate; }
+.frame::before,.frame::after{
+  content:""; position:absolute; z-index:-1; pointer-events:none; border-radius:50%; filter:blur(60px); opacity:.35;
+}
+.frame::before{ width:260px; height:260px; top:-60px; right:-70px; background:var(--gold); animation:orbA 14s ease-in-out infinite alternate; }
+.frame::after{ width:240px; height:240px; bottom:-70px; left:-80px; background:var(--violet); animation:orbB 17s ease-in-out infinite alternate; }
+@keyframes orbA{ to{ transform:translate3d(-50px,90px,0) scale(1.15); } }
+@keyframes orbB{ to{ transform:translate3d(60px,-100px,0) scale(1.2); } }
+.screen{ position:relative; z-index:1; }
+
+.who-opt,.card,.lesson-card,.reel-card{
+  position:relative; overflow:hidden; will-change:transform;
+  transform:perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  transition:transform .2s ease-out, box-shadow .25s ease, border-color .15s;
+}
+.who-opt:hover,.card:hover,.lesson-card:hover,.reel-card:hover{ box-shadow:0 14px 34px rgba(0,0,0,.28), 0 0 0 1px rgba(232,163,61,.25); }
+.who-opt::after,.card::after,.lesson-card::after,.reel-card::after{
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .2s;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.14), transparent 55%);
+}
+.who-opt:hover::after,.card:hover::after,.lesson-card:hover::after,.reel-card:hover::after,
+.who-opt.is-tilt::after,.card.is-tilt::after,.lesson-card.is-tilt::after,.reel-card.is-tilt::after{ opacity:1; }
+
+.btn-primary{ box-shadow:0 6px 0 #b97a1f, 0 12px 24px rgba(232,163,61,.28); transition:transform .12s ease, box-shadow .12s ease; }
+.btn-primary:active{ transform:translateY(4px) scale(.98); box-shadow:0 2px 0 #b97a1f, 0 4px 10px rgba(232,163,61,.2); }
+
+/* one hero moment: floating 3D vinyl + flip-in role cards */
+.onb-hero{ position:relative; overflow:hidden; }
+.onb-hero > *:not(.vinyl){ position:relative; z-index:1; }
+.vinyl{
+  position:absolute; z-index:0; top:34px; right:-46px; width:170px; height:170px; border-radius:50%; pointer-events:none; opacity:.9;
+  background:
+    radial-gradient(circle, var(--gold) 0 13%, #1B1409 14% 17%, transparent 18%),
+    repeating-radial-gradient(circle, #1d1916 0 2px, #2b241f 3px 4px),
+    conic-gradient(from 0deg, rgba(255,255,255,.14), transparent 25%, rgba(255,255,255,.1) 50%, transparent 75%, rgba(255,255,255,.14));
+  box-shadow:0 24px 40px rgba(0,0,0,.45);
+  animation:vinylSpin 9s linear infinite, vinylFloat 6s ease-in-out infinite alternate;
+}
+@keyframes vinylSpin{ from{ transform:perspective(600px) rotateX(58deg) rotateZ(0deg);} to{ transform:perspective(600px) rotateX(58deg) rotateZ(360deg);} }
+@keyframes vinylFloat{ from{ translate:0 0; } to{ translate:-10px 16px; } }
+.onb-hero .who-opt{ animation:flipIn .7s cubic-bezier(.16,1,.3,1) both; }
+.onb-hero .who-opt:nth-of-type(1){ animation-delay:.15s; }
+.onb-hero .who-opt:nth-of-type(2){ animation-delay:.28s; }
+.onb-hero .who-opt:nth-of-type(3){ animation-delay:.41s; }
+@keyframes flipIn{ from{ opacity:0; transform:perspective(700px) rotateX(-60deg) translateY(30px); } to{ opacity:1; transform:perspective(700px) rotateX(0) translateY(0); } }
+
+@media (prefers-reduced-motion: reduce){
+  .frame::before,.frame::after,.vinyl,.onb-hero .who-opt{ animation:none !important; }
+  .who-opt,.card,.lesson-card,.reel-card{ transform:none !important; }
+}
+
+/* ===== Create your own beat (additive) ===== */
+.beat-cta{
+  margin:0 18px 14px; border-radius:999px; background:linear-gradient(90deg,var(--gold),#f0d79b);
+  color:#1B1409; text-align:center; padding:14px; font-weight:700; cursor:pointer; font-size:14.5px;
+  box-shadow:0 5px 0 #b97a1f; transition:transform .12s ease, box-shadow .12s ease;
+}
+.beat-cta:active{ transform:translateY(3px); box-shadow:0 2px 0 #b97a1f; }
+#beats-page{
+  position:fixed; top:0; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; z-index:95;
+  background:#0b0b0d; display:none; flex-direction:column;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+#beats-page.open{ display:flex; }
+#beats-page .bp-bar{ display:flex; align-items:center; gap:10px; padding:10px 14px; border-bottom:1px solid var(--line); background:var(--panel); color:var(--text); }
+#beats-page .bp-back{ background:var(--panel-2); border:1px solid var(--line); color:var(--text); border-radius:50%; width:36px; height:36px; font-size:16px; cursor:pointer; }
+#beats-page .bp-title{ font-family:'Space Grotesk',system-ui,sans-serif; font-weight:700; font-size:15px; }
+#beats-page iframe{ flex:1; width:100%; border:0; background:#0b0b0d; }
+</style>
+</head>
+<body>
+<div class="frame" id="frame"></div>
+
+<script>
+/* =========================================================
+   UNDERRATED MUSIC — prototype
+   All data is stored per-viewer in this browser's localStorage.
+   ========================================================= */
+
+const STORE_KEY = 'um_state_v1';
+
+function uid(){ return Math.random().toString(36).slice(2,10); }
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return null;
+}
+function saveState(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
+  catch(e){ console.error('save failed', e); }
+}
+
+/* ---------- icon / cover-art system (custom-drawn, no external images) ---------- */
+const ICON_PATHS = {
+  mic:      '<rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/>',
+  headphones:'<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2" y="14" width="5" height="7" rx="2"/><rect x="17" y="14" width="5" height="7" rx="2"/>',
+  keys:     '<rect x="3" y="6" width="18" height="12" rx="1.5"/><line x1="7.5" y1="6" x2="7.5" y2="14"/><line x1="12" y1="6" x2="12" y2="14"/><line x1="16.5" y1="6" x2="16.5" y2="14"/>',
+  drum:     '<ellipse cx="12" cy="7" rx="8" ry="3"/><path d="M4 7v8c0 1.7 3.6 3 8 3s8-1.3 8-3V7"/>',
+  guitar:   '<circle cx="8" cy="16" r="5"/><line x1="11" y1="12.5" x2="19" y2="4.5"/><line x1="17" y1="2.5" x2="21" y2="6.5"/>',
+  mixer:    '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8" cy="10" r="2"/><circle cx="16" cy="14" r="2"/><line x1="8" y1="4" x2="8" y2="8"/><line x1="16" y1="16" x2="16" y2="20"/>',
+  horn:     '<path d="M3 10v4h6l8 4V6l-8 4H3z"/><path d="M19 9a3 3 0 0 1 0 6"/>',
+  wave:     '<line x1="3" y1="10" x2="3" y2="14"/><line x1="7" y1="6" x2="7" y2="18"/><line x1="11" y1="9" x2="11" y2="15"/><line x1="15" y1="4" x2="15" y2="20"/><line x1="19" y1="8" x2="19" y2="16"/>',
+  bolt:     '<path d="M13 2 4 14h6l-1 8 9-12h-6z"/>',
+  flame:    '<path d="M12 2c3 4 6 6.5 6 11a6 6 0 0 1-12 0c0-1.8.8-3 1.8-4 .1 1.8 1 2.8 2 2.8-.4-3-.6-5.8 2.2-9.8z"/>',
+  moon:     '<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/>',
+  spark:    '<path d="M12 2l2 7h7l-5.5 4.5L17 21l-5-4-5 4 1.5-7.5L3 9h7z"/>',
+  cap:      '<path d="M4 15a8 8 0 0 1 16 0"/><path d="M2 15h20"/><rect x="9" y="4" width="6" height="4" rx="1"/>',
+  play:     '<circle cx="12" cy="12" r="9"/><polygon points="10,8 16,12 10,16"/>',
+  pencil:   '<path d="M3 21l4-1 11-11-3-3L4 17z"/><path d="M14 6l3 3"/>',
+};
+const EMOJI_ICON_MAP = {
+  '🎤':'mic', '🎧':'headphones', '🎹':'keys', '🥁':'drum', '🎸':'guitar',
+  '🎛️':'mixer', '🪕':'guitar', '🎺':'horn', '🎷':'horn', '🌀':'wave',
+  '⚡':'bolt', '🔥':'flame', '🌙':'moon', '💫':'spark', '🧢':'cap',
+  '🎵':'wave', '🎬':'play', '📝':'pencil', '🎚️':'mixer', '📻':'wave',
+};
+const GRADIENTS = [
+  'linear-gradient(135deg,#E8A33D,#C9720F)',
+  'linear-gradient(135deg,#8C7CFF,#4C3ED9)',
+  'linear-gradient(135deg,#FF6FA5,#C23E74)',
+  'linear-gradient(135deg,#5FBF8F,#2C8560)',
+  'linear-gradient(135deg,#FF9457,#E85D5D)',
+  'linear-gradient(135deg,#4CC3D9,#3A6FC9)',
+  'linear-gradient(135deg,#B98CFF,#7C4FE0)',
+  'linear-gradient(135deg,#E8C23D,#E8703D)',
+];
+function hashIdx(str){
+  let h = 0;
+  for(let i=0;i<(str||'').length;i++) h = (h*31 + str.charCodeAt(i)) >>> 0;
+  return h;
+}
+function iconGlyph(emojiKey, iconSizePct){
+  const iconName = EMOJI_ICON_MAP[emojiKey] || 'wave';
+  return `<svg viewBox="0 0 24 24" width="${iconSizePct}" height="${iconSizePct}" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICON_PATHS[iconName]}</svg>`;
+}
+/* Circular avatar badge: gradient background + line-icon, fully self-contained (no external images) */
+function avatarBadge(emojiKey, idx){
+  const grad = GRADIENTS[Math.abs(idx||0) % GRADIENTS.length];
+  return `<div style="width:100%;height:100%;border-radius:50%;background:${grad};display:flex;align-items:center;justify-content:center;">${iconGlyph(emojiKey,'52%')}</div>`;
+}
+/* Larger "cover art" panel for posts/reels: gradient + soft highlight + centered icon + waveform footer */
+function deriveTitle(text){
+  const words = (text||'').trim().split(/\s+/).filter(Boolean);
+  if(!words.length) return 'Untitled';
+  let t = words.slice(0,4).join(' ');
+  if(words.length > 4) t += '…';
+  return t;
+}
+function coverArt(emojiKey, idx, opts){
+  opts = opts || {};
+  const grad = GRADIENTS[Math.abs(idx||0) % GRADIENTS.length];
+  const hasText = !!opts.title;
+  return `<div style="width:100%;height:100%;position:relative;background:radial-gradient(circle at 26% 20%, rgba(255,255,255,.22), transparent 55%), ${grad};display:flex;align-items:center;justify-content:center;overflow:hidden;">
+    <div style="position:absolute;inset:0;opacity:.12;background:repeating-linear-gradient(115deg, transparent 0 18px, #fff 18px 19px);"></div>
+    <div style="position:absolute;width:58%;aspect-ratio:1;border-radius:50%;border:1.5px solid rgba(255,255,255,.28);"></div>
+    <div style="position:absolute;width:41%;aspect-ratio:1;border-radius:50%;border:1.5px solid rgba(255,255,255,.22);"></div>
+    <div style="position:relative;width:30%;aspect-ratio:1;border-radius:50%;background:rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(0,0,0,.25);">
+      ${iconGlyph(emojiKey,'58%')}
+    </div>
+    ${hasText ? `
+    <div style="position:absolute;left:0;right:0;bottom:0;padding:16px 14px 12px;background:linear-gradient(to top, rgba(0,0,0,.78), rgba(0,0,0,.15) 70%, transparent);">
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14.5px;color:#fff;line-height:1.25;">${escapeHtml(opts.title)}</div>
+      <div style="font-size:11.5px;color:rgba(255,255,255,.72);margin-top:2px;">${escapeHtml(opts.artist||'')}</div>
+    </div>` : `
+    <div style="position:absolute;bottom:10px;left:14px;right:14px;display:flex;align-items:flex-end;gap:3px;height:14px;opacity:.5;">
+      ${[6,11,15,9,13,7,12,5].map(h=>`<div style="flex:1;background:#fff;border-radius:2px;height:${h}px;"></div>`).join('')}
+    </div>`}
+  </div>`;
+}
+
+/* ---------- dummy seed data ---------- */
+const DUMMY_AVATARS = ['🎤','🎧','🎹','🥁','🎸','🎛️','🪕','🎺','🎷','🌀','⚡','🔥','🌙','💫','🧢'];
+const WRITER_CATS = { a:'Rapper', b:'Singer', c:'Rapper & Singer', d:'Songwriter' };
+const DESIGNER_CATS = { a:'Hip-Hop Designer', b:'Song Designer', c:'Both', d:'Sound Designer' };
+
+function seedDummies(){
+  const names = [
+    ['Kavi Raw','rapper','a','Streets never sleep and neither do I. Been rapping since 15.','🎤'],
+    ['Mehak Tunes','singer','b','Sad girl anthems with a party twist.','🌙'],
+    ['Zuben Bars','both','c','Bars in the morning, hooks by night.','🔥'],
+    ['Nyla Verse','writer','d','Poetry-first songwriter, love metaphors.','💫'],
+    ['DJ Kohra','designer','a','Dark trap beats, FL Studio native.','🎛️'],
+    ['Prod. Anay','designer','b','Sad-song specialist, piano loops my thing.','🎹'],
+    ['Rhea Mix','designer','c','Full production — mixing, mastering, beats.','🌀'],
+    ['Sound by Ilm','designer','d','Experimental textures, foley, ambient layers.','⚡'],
+    ['Tashi Flow','rapper','a','Freestyle king from the underground scene.','🎤'],
+    ['Ojas Kahaani','both','c','I write the story and produce it too.','🧢'],
+    ['Meher Notes','singer','b','Party anthems, festival-ready hooks.','🎷'],
+    ['Beatz by Rohan','designer','a','Hip-hop drums that hit different.','🥁'],
+    ['Aariv Lines','writer','d','Punchlines over everything.','🎺'],
+    ['Studio Naaz','designer','c','Your one-stop DAW wizard.','🪕'],
+  ];
+  return names.map((n,i)=>{
+    const isDesigner = n[4] ? false : false;
+    const roleGuess = ['DJ Kohra','Prod. Anay','Rhea Mix','Sound by Ilm','Beatz by Rohan','Studio Naaz'].includes(n[0]) ? 'designer' : (n[1]==='both' ? 'both' : 'writer');
+    const hasPost = i % 3 !== 2; // most have a post, some don't (id type y)
+    return {
+      id: 'd_'+i,
+      idx: i,
+      isDummy:true,
+      role: roleGuess,
+      penName: n[0],
+      category: roleGuess==='writer' ? WRITER_CATS[n[2]] : (roleGuess==='designer' ? DESIGNER_CATS[n[2]] : (WRITER_CATS[n[2]]+' / '+DESIGNER_CATS[n[2]])),
+      avatarEmoji: n[5],
+      bioPublicSnippet: n[3],
+      hasPost,
+      post: hasPost ? {
+        emoji: n[5],
+        caption: roleGuess==='designer'
+          ? 'New beat pack just dropped — link in bio. Looking for a writer to bounce ideas with.'
+          : 'Fresh 16 bars, need a producer who gets the vibe. Who wants to collab?'
+      } : null,
+      works: hasPost ? [{type:'text', title:'Untitled Session'}] : [],
+    };
+  });
+}
+
+const LEARN_VIDEOS_SEED = [
+  { id:'lv1', title:'Getting Started with FL Studio', desc:'Interface tour + first beat', emoji:'🎬', premium:false },
+  { id:'lv2', title:'Writing Your First Hook', desc:'Structure, rhyme, delivery', emoji:'📝', premium:false },
+  { id:'lv3', title:'Mixing Vocals Like a Pro', desc:'EQ, compression, reverb chains', emoji:'🎚️', premium:true },
+  { id:'lv4', title:'Mastering for Streaming', desc:'Loudness targets for Spotify/YT', emoji:'📻', premium:true },
+  { id:'lv5', title:'Building a Trap Drum Pattern', desc:'Groove, swing, layering', emoji:'🥁', premium:false },
+];
+
+const BEATS_SEED = [
+  { id:'b1', name:'Midnight Drift', author:'DJ Kohra', price:'free', status:'approved' },
+  { id:'b2', name:'Rooftop Sadness', author:'Prod. Anay', price:'premium', status:'approved' },
+  { id:'b3', name:'Static Bloom', author:'Sound by Ilm', price:'premium', status:'approved' },
+  { id:'b4', name:'Concrete Anthem', author:'Beatz by Rohan', price:'free', status:'approved' },
+];
+
+const CREATION_SEED = [
+  {
+    id:'c1', idx:2, authorName:'Zuben Bars', authorRole:'both', emoji:'🔥',
+    caption:'Verse 2 hit different at 2am. Full track coming with whoever wants to work together on the hook.',
+    comments:[
+      {name:'Rhea Mix', text:'This is fire. Down to produce it — hit my DM.'},
+      {name:'Nyla Verse', text:'If you cannot pay upfront we can always do a 50-50 on this one.'},
+    ]
+  },
+  {
+    id:'c2', idx:4, authorName:'DJ Kohra', authorRole:'designer', emoji:'🎛️',
+    caption:'New dark trap loop, 140 BPM. Free for anyone who wants to write over it — tag me when it drops.',
+    comments:[
+      {name:'Tashi Flow', text:'Sending you 16 bars tonight.'},
+      {name:'Meher Notes', text:'Would you do a 50_50 deal on distribution if I sing the hook?'},
+    ]
+  },
+  {
+    id:'c3', idx:9, authorName:'Ojas Kahaani', authorRole:'both', emoji:'🧢',
+    caption:'Wrote and produced this one solo. Feedback welcome — what should the next single be about?',
+    comments:[
+      {name:'Studio Naaz', text:'The low end on this is clean. What plugin chain?'},
+    ]
+  },
+];
+
+/* ---------- state ---------- */
+let state = loadState();
+if(!state){
+  state = {
+    screen: 'onboarding',       // onboarding | profile | deal | main
+    mainTab: 'home',            // home | learn | creation | messages | me
+    onboardRole: null,          // writer | designer | both
+    profile: null,              // current user's profile object
+    dummies: seedDummies(),
+    workTogether: [],           // ids the user tapped "work together" on
+    chats: {},                  // id -> [{from, text, time}]
+    activeChatId: null,
+    learnVideos: LEARN_VIDEOS_SEED,
+    beats: BEATS_SEED,
+    myBeats: [],                // beats uploaded by current user, pending/approved/rejected
+    creation: CREATION_SEED.map(c=>({...c, comments:[...c.comments]})),
+    myWorksCount: 0,
+    isAdmin: false,
+    trainingOpen: false,
+    dealOverlay: false,
+    activeLesson: null,
+  };
+  saveState();
+}
+// migrate older saved demo data that predates the idx/icon system
+if(!state.dummies || !state.dummies.length || state.dummies[0].idx === undefined){
+  state.dummies = seedDummies();
+}
+if(!state.creation || !state.creation.length || state.creation[0].idx === undefined){
+  state.creation = CREATION_SEED.map(c=>({...c, comments:[...c.comments]}));
+}
+if(!state.chats) state.chats = {};
+if(!state.myBeats) state.myBeats = [];
+if(!state.isAdmin) state.isAdmin = false;
+
+function setState(patch){
+  Object.assign(state, patch);
+  saveState();
+  render();
+}
+
+/* ---------- toast ---------- */
+function toast(msg){
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  requestAnimationFrame(()=> el.classList.add('show'));
+  setTimeout(()=>{ el.classList.remove('show'); setTimeout(()=> el.remove(), 300); }, 2200);
+}
+
+/* ---------- helpers ---------- */
+function escapeHtml(str){
+  return (str||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function linkifyDeal(text){
+  const escaped = escapeHtml(text);
+  return escaped.replace(/(50[-_. ]?50|50%)/gi, '<span class="deal-link" data-open-deal="1">$1</span>');
+}
+function allProfiles(){
+  return state.dummies;
+}
+function oppositeFirstFeed(){
+  const mine = state.profile ? state.profile.role : 'writer';
+  const opposite = mine === 'writer' ? 'designer' : (mine === 'designer' ? 'writer' : null);
+  const list = [...state.dummies];
+  list.sort((a,b)=>{
+    const aScore = opposite ? (a.role===opposite?0:(a.role==='both'?1:2)) : 0;
+    const bScore = opposite ? (b.role===opposite?0:(b.role==='both'?1:2)) : 0;
+    return aScore - bScore;
+  });
+  return list;
+}
+function findProfileById(id){
+  return state.dummies.find(d=>d.id===id) || null;
+}
+function roleClass(role){
+  return role==='designer' ? 'tag-designer' : (role==='both' ? 'tag-both' : 'tag-writer');
+}
+function roleLabel(role){
+  return role==='designer' ? 'Music Designer' : (role==='both' ? 'Writer & Designer' : 'Lyricist / Rapper');
+}
+function profileEmojiKey(prof){
+  const s = (prof.subroleLabel||'').toLowerCase();
+  if(prof.role === 'designer'){
+    if(s.includes('hip-hop')) return '🥁';
+    if(s.includes('song designer')) return '🎹';
+    if(s.includes('both')) return '🎛️';
+    return '⚡';
+  }
+  if(s.includes('rapper') && s.includes('singer')) return '🔥';
+  if(s.includes('rapper')) return '🎤';
+  if(s.includes('singer')) return '🌙';
+  return '💫';
+}
+
+/* ---------- rendering ---------- */
+const frame = document.getElementById('frame');
+
+function render(){
+  let html = '';
+  if(state.screen === 'onboarding') html = renderOnboarding();
+  else if(state.screen === 'profile') html = renderProfileForm();
+  else if(state.screen === 'deal') html = renderDealScreen();
+  else html = renderMain();
+  frame.innerHTML = html;
+  attachHandlers();
+  if(state.dealOverlay){
+    frame.insertAdjacentHTML('beforeend', renderDealOverlay());
+    attachDealOverlayHandlers();
+  }
+  if(state.trainingOpen){
+    frame.insertAdjacentHTML('beforeend', renderTrainingOverlay());
+    attachTrainingHandlers();
+  }
+}
+
+/* ---------- ONBOARDING ---------- */
+function renderOnboarding(){
+  return `
+  <div class="screen onb-hero">
+    <div class="onb-logo">UNDERRATED MUSIC</div>
+    <h1 class="onb-title">Who are you?</h1>
+    <p class="onb-sub">Tell us your role so we can connect you with the right people.</p>
+    <div class="who-opt" data-role="writer">
+      <div class="ico" style="background:rgba(232,163,61,.15);color:var(--gold);">🎤</div>
+      <div class="body"><b>I write lyrics / songs</b><span>Rapper, songwriter, or vocalist</span></div>
+    </div>
+    <div class="who-opt" data-role="designer">
+      <div class="ico" style="background:rgba(140,124,255,.15);color:var(--violet);">🎛️</div>
+      <div class="body"><b>I design music</b><span>Producer / editor — FL Studio, DAW</span></div>
+    </div>
+    <div class="who-opt" data-role="both">
+      <div class="ico" style="background:rgba(95,191,143,.15);color:var(--green);">🎼</div>
+      <div class="body"><b>I do both</b><span>Writing and producing</span></div>
+    </div>
+  </div>`;
+}
+
+/* ---------- PROFILE FORM ---------- */
+let draftProfile = { photo:null, name:'', penName:'', subrole:null, subroleOther:'', handle:'', bio:'', workNote:'' };
+let formErrors = {};
+
+function renderProfileForm(){
+  const isWriter = state.onboardRole === 'writer';
+  const isBoth = state.onboardRole === 'both';
+  const subOpts = isWriter || isBoth
+    ? [['a','Rapper'],['b','Singer — sad / party songs'],['c','Both'],['d','Something else']]
+    : [['a','Hip-hop designer'],['b','Song designer — sad / party songs'],['c','Both'],['d','Something else']];
+
+  return `
+  <div class="screen">
+    <div class="back-row">
+      <button class="back-btn" data-action="back-onboard">←</button>
+      <div style="font-weight:700;font-size:14px;">${isWriter ? 'Lyricist / Songwriter profile' : (isBoth ? 'Writer & Designer profile' : 'Music Designer profile')}</div>
+    </div>
+    <div class="pad" style="flex:1;overflow-y:auto;">
+      <div class="upload-box" id="photo-upload" style="margin-bottom:18px;">
+        ${draftProfile.photo ? `<img src="${draftProfile.photo}" style="width:72px;height:72px;border-radius:50%;object-fit:cover;">` : `<div style="font-size:28px;margin-bottom:6px;">📷</div><div class="muted" style="font-size:13px;">Upload a photo</div>`}
+        <input type="file" id="photo-input" accept="image/*" style="display:none;">
+      </div>
+
+      <div class="field ${formErrors.name?'error':''}">
+        <label>Your name *</label>
+        <input id="f-name" value="${escapeHtml(draftProfile.name)}" placeholder="e.g. Aarav Sharma">
+        <div class="err-msg">Please enter your name.</div>
+      </div>
+
+      <div class="field">
+        <label>Your pen name</label>
+        <input id="f-penname" value="${escapeHtml(draftProfile.penName)}" placeholder="e.g. Kavi Raw">
+      </div>
+
+      <div class="field ${formErrors.subrole?'error':''}">
+        <label>You are a *</label>
+        <div class="pill-row" id="subrole-pills">
+          ${subOpts.map(([k,label])=>`<div class="pill ${draftProfile.subrole===k?'selected':''}" data-sub="${k}">${label}</div>`).join('')}
+        </div>
+        ${draftProfile.subrole==='d' ? `<input id="f-subother" style="margin-top:10px;" placeholder="Describe your type" value="${escapeHtml(draftProfile.subroleOther)}">` : ''}
+        <div class="err-msg">Please pick a category.</div>
+      </div>
+
+      ${isWriter || isBoth ? `
+      <div class="field">
+        <label>Your handle (YouTube, Instagram, or any link)</label>
+        <input id="f-handle" value="${escapeHtml(draftProfile.handle)}" placeholder="youtube.com/@yourname">
+      </div>` : `
+      <div class="field">
+        <label>Your handle (portfolio, YouTube, or any link)</label>
+        <input id="f-handle" value="${escapeHtml(draftProfile.handle)}" placeholder="youtube.com/@yourstudio">
+      </div>`}
+
+      <div class="field">
+        <label>Upload your work (describe it — video/text link, or a quick note)</label>
+        <textarea id="f-work" rows="2" placeholder="e.g. link to your latest track, or paste lyrics">${escapeHtml(draftProfile.workNote)}</textarea>
+      </div>
+
+      <div class="field">
+        <label>Describe yourself privately</label>
+        <textarea id="f-bio" rows="3" placeholder="UPI ID, WhatsApp number, or anything only the platform manager can see">${escapeHtml(draftProfile.bio)}</textarea>
+        <div class="muted" style="font-size:11.5px;margin-top:4px;">Only the platform manager can access this. It is never shown publicly.</div>
+      </div>
+
+      <button class="btn btn-primary btn-block" id="submit-profile" style="margin-top:8px;">Submit</button>
+    </div>
+  </div>`;
+}
+
+/* ---------- DEAL SCREEN (standalone, first-time after profile) ---------- */
+function renderDealScreen(){
+  return `
+  <div class="screen" style="justify-content:flex-end;background:rgba(0,0,0,.4);">
+    ${dealSheetMarkup(true)}
+  </div>`;
+}
+function dealSheetMarkup(standalone){
+  return `
+  <div class="deal-sheet" style="border-radius:${standalone?'22px 22px 0 0':'22px 22px 0 0'};margin-top:auto;">
+    <button class="close-x" data-action="close-deal">✕</button>
+    <div class="deal-badge">💛 THE 50-50 DEAL</div>
+    <h2>Can't pay your music designer?</h2>
+    <p>If you don't have money to pay your music designer, and you write well, you and your editor can split rights 50-50 on that track.</p>
+    <p>The song gets released under the <b style="color:var(--text);">Underrated Music</b> banner — uploaded to our YouTube channel as a collab, and distributed to YouTube Music, Spotify, JioSaavn, Amazon Music, and other major platforms.</p>
+    <p>To set this up, message <b style="color:var(--text);">Underrated Music</b> with both of your details and the track info.</p>
+    <button class="btn btn-primary btn-block" data-action="close-deal" style="margin-top:6px;">Close</button>
+  </div>`;
+}
+
+/* ---------- MAIN APP ---------- */
+function renderMain(){
+  return `
+  <div class="screen">
+    ${renderTopbar()}
+    <div class="content">
+      ${state.viewProfileId ? renderProfileDetail(state.viewProfileId) : `
+      ${state.mainTab==='home' ? renderHome() : ''}
+      ${state.mainTab==='learn' ? renderLearn() : ''}
+      ${state.mainTab==='creation' ? renderCreation() : ''}
+      ${state.mainTab==='messages' ? renderMessages() : ''}
+      ${state.mainTab==='me' ? renderMe() : ''}
+      `}
+    </div>
+    ${renderBottomNav()}
+  </div>`;
+}
+
+function renderTopbar(){
+  const titles = { home:'UNDERRATED <span>MUSIC</span>', learn:'Learn', creation:'Creation Zone', messages:'Messages', me:'My Profile' };
+  return `
+  <div class="topbar">
+    <div class="logo">${state.mainTab==='home' ? titles.home : titles[state.mainTab]}</div>
+    <div class="icon-btn" data-action="go-messages">✉️</div>
+  </div>`;
+}
+
+function renderBottomNav(){
+  const items = [
+    ['home','🏠','Home'], ['learn','🎓','Learn'], ['creation','🎬','Creation'],
+    ['messages','💬','Messages'], ['me','👤','Me']
+  ];
+  return `<div class="bottom-nav">
+    ${items.map(([key,ic,label])=>`<button class="${state.mainTab===key?'active':''}" data-tab="${key}"><span class="ic">${ic}</span>${label}</button>`).join('')}
+  </div>`;
+}
+
+/* ---- HOME FEED ---- */
+function renderHome(){
+  const feed = oppositeFirstFeed();
+  const withPost = feed.filter(p=>p.hasPost);
+  const withoutPost = feed.filter(p=>!p.hasPost);
+  return `
+  <div class="section-title">For you</div>
+  ${withPost.map(p=>feedCard(p)).join('')}
+  ${withoutPost.length ? `<div class="section-title">Suggested creators</div>` : ''}
+  ${withoutPost.map(p=>suggestRow(p)).join('')}
+  `;
+}
+function feedCard(p){
+  const isWT = state.workTogether.includes(p.id);
+  return `
+  <div class="card">
+    <div class="card-head">
+      <div class="avatar" style="overflow:hidden;cursor:pointer;" data-viewprofile="${p.id}">${avatarBadge(p.avatarEmoji, p.idx)}</div>
+      <div class="names" style="cursor:pointer;" data-viewprofile="${p.id}">
+        <b>${escapeHtml(p.penName)}</b>
+        <div class="cat ${roleClass(p.role)}">${escapeHtml(p.category)}</div>
+      </div>
+      <button class="work-btn ${isWT?'active':''}" data-work="${p.id}" data-caption="${escapeHtml(p.post ? p.post.caption : '')}">${isWT?'Working':'Work together'}</button>
+      <div class="msg-ic" data-openchat="${p.id}">💬</div>
+    </div>
+    <div class="media-box" style="overflow:hidden;cursor:pointer;" data-viewprofile="${p.id}">${coverArt(p.post.emoji, p.idx, {title: deriveTitle(p.post.caption), artist: p.penName})}</div>
+    <div class="media-caption"><b>${escapeHtml(p.penName)}</b> ${escapeHtml(p.post.caption)}</div>
+  </div>`;
+}
+function suggestRow(p){
+  const isWT = state.workTogether.includes(p.id);
+  return `
+  <div class="suggest-row">
+    <div class="avatar avatar-sm" style="overflow:hidden;cursor:pointer;" data-viewprofile="${p.id}">${avatarBadge(p.avatarEmoji, p.idx)}</div>
+    <div class="names" style="cursor:pointer;" data-viewprofile="${p.id}">
+      <b>${escapeHtml(p.penName)}</b>
+      <div class="cat ${roleClass(p.role)}">${escapeHtml(p.category)}</div>
+    </div>
+    <button class="work-btn ${isWT?'active':''}" data-work="${p.id}" data-caption="">${isWT?'Working':'Work together'}</button>
+    <div class="msg-ic" data-openchat="${p.id}">💬</div>
+  </div>`;
+}
+
+/* ---- PROFILE DETAIL ("their Me page") ---- */
+function renderProfileDetail(id){
+  const p = findProfileById(id);
+  if(!p) return `<div class="empty">Profile not found.</div>`;
+  const isWT = state.workTogether.includes(p.id);
+  return `
+  <div class="back-row">
+    <button class="back-btn" data-action="close-profile-detail">←</button>
+    <div style="font-weight:700;font-size:14px;">${escapeHtml(p.penName)}</div>
+  </div>
+  <div class="me-header">
+    <div class="avatar" style="overflow:hidden;">${avatarBadge(p.avatarEmoji, p.idx)}</div>
+    <div>
+      <p class="me-name">${escapeHtml(p.penName)}</p>
+      <p class="me-cat ${roleClass(p.role)}">${escapeHtml(p.category)}</p>
+    </div>
+  </div>
+  <div class="me-stats">
+    <div class="me-stat"><b>${p.hasPost ? 1 : 0}</b><span>Videos uploaded</span></div>
+    <div class="me-stat"><b>${roleLabel(p.role)}</b><span>Role</span></div>
+  </div>
+  <div class="me-section">
+    <h4>About</h4>
+    <div class="info-row"><span>Category</span><span>${escapeHtml(p.category)}</span></div>
+    <div class="info-row"><span>Bio</span><span style="text-align:right;max-width:60%;">${escapeHtml(p.bioPublicSnippet)}</span></div>
+  </div>
+  <div class="me-section">
+    <h4>Work</h4>
+    ${p.hasPost ? `
+      <div class="media-box" style="overflow:hidden;margin-bottom:10px;">${coverArt(p.post.emoji, p.idx, {title: deriveTitle(p.post.caption), artist: p.penName})}</div>
+      <div class="muted" style="font-size:13px;line-height:1.5;">${escapeHtml(p.post.caption)}</div>
+    ` : `<div class="muted" style="font-size:13px;">Nothing uploaded yet.</div>`}
+  </div>
+  <div class="pad" style="display:flex;gap:10px;">
+    <button class="btn btn-primary" style="flex:1;" data-work="${p.id}" data-caption="${escapeHtml(p.post ? p.post.caption : '')}">${isWT?'Working together':'Work together'}</button>
+    <button class="btn btn-outline" style="flex:1;" data-openchat="${p.id}">Message</button>
+  </div>
+  `;
+}
+
+/* ---- LEARN ---- */
+function renderLearn(){
+  const videos = state.learnVideos;
+  return `
+  <div class="training-cta" data-action="open-training">🎧 Training Zone — beats & walkthroughs</div>
+  <div class="beat-cta" data-action="open-beats">🎛️ Create your own beat</div>
+  <div class="section-title">Lessons</div>
+  ${videos.map(v=>`
+    <div class="lesson-card" data-lesson="${v.id}">
+      <div class="lesson-thumb" style="overflow:hidden;">${coverArt(v.emoji, hashIdx(v.id))}</div>
+      <div class="lesson-info">
+        <b>${escapeHtml(v.title)}</b>
+        <span>${escapeHtml(v.desc)}</span>
+        <div class="lock-chip ${v.premium?'premium':'free'}">${v.premium?'Premium':'Free'}</div>
+      </div>
+    </div>
+  `).join('')}
+  ${state.isAdmin ? `
+  <div class="pad">
+    <button class="btn btn-outline btn-block" data-action="admin-add-lesson">+ Upload a lesson (admin)</button>
+  </div>` : ''}
+  `;
+}
+
+/* ---- Training / beats overlay ---- */
+function renderTrainingOverlay(){
+  const beats = [...state.beats, ...state.myBeats];
+  return `
+  <div class="deal-overlay" id="training-overlay">
+    <div class="deal-sheet" style="max-height:88vh;">
+      <button class="close-x" data-action="close-training">✕</button>
+      <div class="deal-badge" style="background:rgba(140,124,255,.15);color:var(--violet);">🎧 TRAINING ZONE</div>
+      <h2>Audio editing walkthrough</h2>
+      <p>1. Set your project BPM before adding any loops.<br>
+      2. Sketch drums first, then bass, then melody.<br>
+      3. Leave headroom — mix under -6dB, master last.<br>
+      4. Reference a track you love in the same genre.</p>
+      <h2 style="font-size:17px;margin-top:22px;">Beats & BGMs</h2>
+      <p style="margin-bottom:14px;">Free and premium beats from our designers. Designers can upload their own — new uploads are reviewed before going live.</p>
+      ${beats.map(b=>`
+        <div class="beat-row" style="border-radius:10px;">
+          <div class="beat-wave" style="overflow:hidden;">${avatarBadge('🎵', hashIdx(b.id||b.name))}</div>
+          <div class="beat-info"><b>${escapeHtml(b.name)}</b><span>by ${escapeHtml(b.author)} · ${b.price==='free'?'Free':'Premium'}</span></div>
+          <div class="status-chip ${b.status}">${b.status}</div>
+        </div>
+      `).join('')}
+      ${(state.profile && (state.profile.role==='designer' || state.profile.role==='both')) ? `
+      <button class="btn btn-outline btn-block" style="margin-top:14px;" data-action="upload-beat">+ Upload a beat for review</button>
+      ` : ''}
+    </div>
+  </div>`;
+}
+
+/* ---- CREATION ZONE ---- */
+function renderCreation(){
+  return state.creation.map(c=>`
+    <div class="reel-card">
+      <div class="card-head" style="padding:14px 18px 0;">
+        <div class="avatar avatar-sm" style="overflow:hidden;cursor:pointer;" data-viewprofile-name="${escapeHtml(c.authorName)}">${avatarBadge(c.emoji, c.idx)}</div>
+        <div class="names" style="cursor:pointer;" data-viewprofile-name="${escapeHtml(c.authorName)}"><b>${escapeHtml(c.authorName)}</b><div class="cat ${roleClass(c.authorRole)}">${roleLabel(c.authorRole)}</div></div>
+      </div>
+      <div class="reel-media" style="margin:10px 18px;border-radius:14px;overflow:hidden;">${coverArt(c.emoji, c.idx, {title: deriveTitle(c.caption), artist: c.authorName})}</div>
+      <div class="reel-body">
+        <div class="media-caption">${escapeHtml(c.caption)}</div>
+        <div class="reel-actions">
+          <button class="btn btn-outline" data-work-creation="${c.id}">Work together</button>
+          <button class="btn btn-outline" data-openchat-name="${c.authorName}">Message</button>
+        </div>
+      </div>
+      <div class="comment-block">
+        ${c.comments.map(cm=>`<div class="comment-line"><b>${escapeHtml(cm.name)}</b>${linkifyDeal(cm.text)}</div>`).join('')}
+      </div>
+      <div class="comment-input-row">
+        <input placeholder="Add a comment..." data-comment-input="${c.id}">
+        <button data-comment-send="${c.id}">Post</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ---- MESSAGES ---- */
+function renderMessages(){
+  if(state.activeChatId){
+    return renderChatScreen(state.activeChatId);
+  }
+  const ids = Object.keys(state.chats);
+  if(ids.length === 0){
+    return `<div class="empty">No conversations yet.<br>Tap <b>Work together</b> on someone's post to start one.</div>`;
+  }
+  return ids.map(id=>{
+    const p = findProfileById(id);
+    if(!p) return '';
+    const msgs = state.chats[id];
+    const last = msgs[msgs.length-1];
+    return `
+    <div class="chat-row" data-openchat="${id}">
+      <div class="avatar avatar-sm" style="overflow:hidden;">${avatarBadge(p.avatarEmoji, p.idx)}</div>
+      <div class="names"><b>${escapeHtml(p.penName)}</b><div class="last">${escapeHtml(last ? (last.from==='me'?'You: ':'') + last.text : '')}</div></div>
+      <div class="chat-time">now</div>
+    </div>`;
+  }).join('');
+}
+function renderChatScreen(id){
+  const p = findProfileById(id);
+  if(!p) return `<div class="empty">Conversation not found.</div>`;
+  const msgs = state.chats[id] || [];
+  return `
+  <div class="chat-screen">
+    <div class="chat-header">
+      <button class="back-btn" data-action="close-chat">←</button>
+      <div class="avatar avatar-sm" style="overflow:hidden;">${avatarBadge(p.avatarEmoji, p.idx)}</div>
+      <b>${escapeHtml(p.penName)}</b>
+    </div>
+    <div class="chat-body" id="chat-body">
+      ${msgs.map(m=>`<div class="bubble ${m.from}">${linkifyDeal(m.text)}</div>`).join('')}
+    </div>
+    <div class="chat-input-row">
+      <input id="chat-input" placeholder="Message ${escapeHtml(p.penName)}...">
+      <button data-action="send-chat">➤</button>
+    </div>
+  </div>`;
+}
+
+/* ---- ME ---- */
+function renderMe(){
+  const prof = state.profile;
+  if(!prof) return `<div class="empty">No profile yet.</div>`;
+  const worksCount = prof.worksCount || 0;
+  return `
+  <div class="me-header">
+    <div class="avatar" style="overflow:hidden;">${prof.photo ? `<img src="${prof.photo}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">` : avatarBadge(profileEmojiKey(prof), hashIdx(prof.name||'you'))}</div>
+    <div>
+      <p class="me-name">${escapeHtml(prof.penName || prof.name)}</p>
+      <p class="me-cat">${escapeHtml(prof.subroleLabel)} · ${roleLabel(prof.role)}</p>
+    </div>
+  </div>
+  <div class="me-stats">
+    <div class="me-stat"><b>${worksCount}</b><span>Videos uploaded</span></div>
+    <div class="me-stat"><b>${state.workTogether.length}</b><span>Work together</span></div>
+    <div class="me-stat"><b>${worksCount}</b><span>Score / Rank</span></div>
+  </div>
+  <div class="me-section">
+    <h4>About</h4>
+    <div class="info-row"><span>Name</span><span>${escapeHtml(prof.name)}</span></div>
+    <div class="info-row"><span>Handle</span><span>${escapeHtml(prof.handle || '—')}</span></div>
+    <div class="info-row"><span>Category</span><span>${escapeHtml(prof.subroleLabel)}</span></div>
+  </div>
+  <div class="me-section">
+    <h4>Your work</h4>
+    ${worksCount>0 ? `<div class="work-grid">${Array.from({length:worksCount}).map(()=>'<div class="work-cell">🎵</div>').join('')}</div>` : `<div class="muted" style="font-size:13px;">Nothing uploaded yet.</div>`}
+    <button class="btn btn-outline btn-block" style="margin-top:12px;" data-action="add-work">+ Upload work</button>
+  </div>
+  <div class="me-section">
+    <div class="admin-toggle">
+      <span>Admin mode <span class="muted">(manager only)</span></span>
+      <div class="switch ${state.isAdmin?'on':''}" data-action="toggle-admin"><div class="knob"></div></div>
+    </div>
+  </div>
+  <div class="reset-link" data-action="reset-demo">Reset demo data</div>
+  `;
+}
+
+/* ---------- DEAL OVERLAY (global, tappable anywhere) ---------- */
+function renderDealOverlay(){
+  return `<div class="deal-overlay" id="deal-overlay">${dealSheetMarkup(false)}</div>`;
+}
+function attachDealOverlayHandlers(){
+  const ov = document.getElementById('deal-overlay');
+  if(!ov) return;
+  ov.querySelectorAll('[data-action="close-deal"]').forEach(b=>b.addEventListener('click', ()=> setState({dealOverlay:false})));
+  ov.addEventListener('click', e=>{ if(e.target===ov) setState({dealOverlay:false}); });
+}
+function attachTrainingHandlers(){
+  const ov = document.getElementById('training-overlay');
+  if(!ov) return;
+  ov.querySelectorAll('[data-action="close-training"]').forEach(b=>b.addEventListener('click', ()=> setState({trainingOpen:false})));
+  ov.addEventListener('click', e=>{ if(e.target===ov) setState({trainingOpen:false}); });
+  const upBtn = ov.querySelector('[data-action="upload-beat"]');
+  if(upBtn) upBtn.addEventListener('click', ()=>{
+    const name = prompt('Name your beat:');
+    if(!name) return;
+    const priceRaw = prompt('Type "free" or "premium":','free');
+    const price = (priceRaw||'free').toLowerCase().includes('prem') ? 'premium' : 'free';
+    const beat = { id:uid(), name, author: state.profile ? (state.profile.penName||state.profile.name) : 'You', price, status:'pending' };
+    state.myBeats.push(beat);
+    saveState();
+    toast('Sent to Underrated Music for review');
+    render();
+    setTimeout(()=>{
+      const found = state.myBeats.find(b=>b.id===beat.id);
+      if(found){
+        const approved = Math.random() > 0.25;
+        found.status = approved ? 'approved' : 'rejected';
+        saveState();
+        toast(approved ? `"${name}" was approved and is now live` : `"${name}" wasn't approved — audio quality needs work`);
+        render();
+        reopenTraining();
+      }
+    }, 2600);
+  });
+}
+function reopenTraining(){ setState({trainingOpen:true}); }
+
+/* ---------- event wiring ---------- */
+function attachHandlers(){
+  // onboarding
+  frame.querySelectorAll('.who-opt').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      draftProfile = { photo:null, name:'', penName:'', subrole:null, subroleOther:'', handle:'', bio:'', workNote:'' };
+      formErrors = {};
+      setState({ screen:'profile', onboardRole: el.dataset.role });
+    });
+  });
+
+  // profile form
+  const backBtn = frame.querySelector('[data-action="back-onboard"]');
+  if(backBtn) backBtn.addEventListener('click', ()=> setState({ screen:'onboarding' }));
+
+  const photoUp = frame.querySelector('#photo-upload');
+  if(photoUp){
+    photoUp.addEventListener('click', ()=> frame.querySelector('#photo-input').click());
+    frame.querySelector('#photo-input').addEventListener('change', e=>{
+      const file = e.target.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = ()=>{ draftProfile.photo = reader.result; render(); };
+      reader.readAsDataURL(file);
+    });
+  }
+  const nameInp = frame.querySelector('#f-name');
+  if(nameInp) nameInp.addEventListener('input', e=> draftProfile.name = e.target.value);
+  const penInp = frame.querySelector('#f-penname');
+  if(penInp) penInp.addEventListener('input', e=> draftProfile.penName = e.target.value);
+  const handleInp = frame.querySelector('#f-handle');
+  if(handleInp) handleInp.addEventListener('input', e=> draftProfile.handle = e.target.value);
+  const workInp = frame.querySelector('#f-work');
+  if(workInp) workInp.addEventListener('input', e=> draftProfile.workNote = e.target.value);
+  const bioInp = frame.querySelector('#f-bio');
+  if(bioInp) bioInp.addEventListener('input', e=> draftProfile.bio = e.target.value);
+  const subOtherInp = frame.querySelector('#f-subother');
+  if(subOtherInp) subOtherInp.addEventListener('input', e=> draftProfile.subroleOther = e.target.value);
+
+  frame.querySelectorAll('[data-sub]').forEach(el=>{
+    el.addEventListener('click', ()=>{ draftProfile.subrole = el.dataset.sub; render(); });
+  });
+
+  const submitBtn = frame.querySelector('#submit-profile');
+  if(submitBtn) submitBtn.addEventListener('click', submitProfile);
+
+  // main tabs
+  frame.querySelectorAll('[data-tab]').forEach(el=>{
+    el.addEventListener('click', ()=> setState({ mainTab: el.dataset.tab, activeChatId:null, viewProfileId:null }));
+  });
+  const msgIcon = frame.querySelector('[data-action="go-messages"]');
+  if(msgIcon) msgIcon.addEventListener('click', ()=> setState({ mainTab:'messages', activeChatId:null, viewProfileId:null }));
+
+  // deal screen (standalone)
+  frame.querySelectorAll('[data-action="close-deal"]').forEach(b=> b.addEventListener('click', ()=> setState({ screen:'main', mainTab:'home' })));
+
+  // work together
+  frame.querySelectorAll('[data-work]').forEach(el=>{
+    el.addEventListener('click', ()=> handleWorkTogether(el.dataset.work, el.dataset.caption||''));
+  });
+  frame.querySelectorAll('[data-work-creation]').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const c = state.creation.find(x=>x.id===el.dataset.workCreation);
+      toast(`Sent a work-together request to ${c ? c.authorName : 'creator'}`);
+    });
+  });
+
+  // view full profile ("their Me page")
+  frame.querySelectorAll('[data-viewprofile]').forEach(el=>{
+    el.addEventListener('click', ()=> setState({ viewProfileId: el.dataset.viewprofile }));
+  });
+  frame.querySelectorAll('[data-viewprofile-name]').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const p = state.dummies.find(d=>d.penName===el.dataset.viewprofileName);
+      if(p) setState({ viewProfileId: p.id });
+    });
+  });
+  const closeProfileBtn = frame.querySelector('[data-action="close-profile-detail"]');
+  if(closeProfileBtn) closeProfileBtn.addEventListener('click', ()=> setState({ viewProfileId:null }));
+
+  // open chat
+  frame.querySelectorAll('[data-openchat]').forEach(el=>{
+    el.addEventListener('click', ()=> setState({ mainTab:'messages', activeChatId: el.dataset.openchat, viewProfileId:null }));
+  });
+  frame.querySelectorAll('[data-openchat-name]').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const p = state.dummies.find(d=>d.penName===el.dataset.openchatName);
+      if(p) setState({ mainTab:'messages', activeChatId: p.id, viewProfileId:null });
+    });
+  });
+  const closeChatBtn = frame.querySelector('[data-action="close-chat"]');
+  if(closeChatBtn) closeChatBtn.addEventListener('click', ()=> setState({ activeChatId:null }));
+
+  const sendChatBtn = frame.querySelector('[data-action="send-chat"]');
+  if(sendChatBtn){
+    sendChatBtn.addEventListener('click', sendChatMessage);
+    const inp = frame.querySelector('#chat-input');
+    if(inp) inp.addEventListener('keydown', e=>{ if(e.key==='Enter') sendChatMessage(); });
+  }
+  const chatBody = frame.querySelector('#chat-body');
+  if(chatBody) chatBody.scrollTop = chatBody.scrollHeight;
+  frame.querySelectorAll('[data-open-deal]').forEach(el=>{
+    el.addEventListener('click', ()=> setState({ dealOverlay:true }));
+  });
+
+  // learn
+  const trainingCta = frame.querySelector('[data-action="open-training"]');
+  if(trainingCta) trainingCta.addEventListener('click', ()=> setState({ trainingOpen:true }));
+  frame.querySelectorAll('[data-lesson]').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const v = state.learnVideos.find(x=>x.id===el.dataset.lesson);
+      if(!v) return;
+      if(v.premium){ toast('This lesson is premium — unlock it to watch.'); }
+      else { toast(`Playing: ${v.title}`); }
+    });
+  });
+  const adminAddLesson = frame.querySelector('[data-action="admin-add-lesson"]');
+  if(adminAddLesson) adminAddLesson.addEventListener('click', ()=>{
+    const title = prompt('Lesson title:');
+    if(!title) return;
+    const isPremium = confirm('Make this a premium lesson? OK = premium, Cancel = free');
+    state.learnVideos.push({ id:uid(), title, desc:'Uploaded by admin', emoji:'🎬', premium:isPremium });
+    saveState(); render();
+    toast('Lesson published');
+  });
+
+  // creation comments
+  frame.querySelectorAll('[data-comment-send]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const cid = btn.dataset.commentSend;
+      const input = frame.querySelector(`[data-comment-input="${cid}"]`);
+      const text = input.value.trim();
+      if(!text) return;
+      const c = state.creation.find(x=>x.id===cid);
+      c.comments.push({ name: state.profile ? (state.profile.penName||state.profile.name) : 'You', text });
+      saveState(); render();
+    });
+  });
+
+  // me page
+  const toggleAdmin = frame.querySelector('[data-action="toggle-admin"]');
+  if(toggleAdmin) toggleAdmin.addEventListener('click', ()=> setState({ isAdmin: !state.isAdmin }));
+  const addWork = frame.querySelector('[data-action="add-work"]');
+  if(addWork) addWork.addEventListener('click', ()=>{
+    if(!state.profile) return;
+    state.profile.worksCount = (state.profile.worksCount||0) + 1;
+    saveState(); render();
+    toast('Work uploaded');
+  });
+  const resetLink = frame.querySelector('[data-action="reset-demo"]');
+  if(resetLink) resetLink.addEventListener('click', ()=>{
+    if(confirm('Reset all demo data? This clears your profile, chats and uploads.')){
+      localStorage.removeItem(STORE_KEY);
+      location.reload();
+    }
+  });
+}
+
+function handleWorkTogether(id, caption){
+  if(state.workTogether.includes(id)){ toast('Already working together'); return; }
+  const p = findProfileById(id);
+  if(!p) return;
+  state.workTogether.push(id);
+  const myCategory = state.profile ? state.profile.subroleLabel : 'creator';
+  const introText = `Hello, I am ${myCategory}${caption ? ' and I want to work with you on this: "'+caption+'"' : ' and I would love to work together!'}`;
+  if(!state.chats[id]) state.chats[id] = [];
+  state.chats[id].push({ from:'me', text: introText });
+  saveState();
+  render();
+  toast(`Request sent to ${p.penName}`);
+  setTimeout(()=>{
+    if(!state.chats[id]) return;
+    const replies = [
+      "Hey! Thanks for reaching out — let's talk details.",
+      "Love the energy, send me what you've got so far.",
+      "I'm in. Can't pay upfront though, maybe we do a 50-50 on this one?",
+      "Sounds good, drop your reference track and I'll get back to you."
+    ];
+    state.chats[id].push({ from:'them', text: replies[Math.floor(Math.random()*replies.length)] });
+    saveState();
+    if(state.mainTab==='messages' && state.activeChatId===id) render();
+  }, 1600);
+}
+
+function sendChatMessage(){
+  const inp = frame.querySelector('#chat-input');
+  if(!inp) return;
+  const text = inp.value.trim();
+  if(!text) return;
+  const id = state.activeChatId;
+  if(!state.chats[id]) state.chats[id] = [];
+  state.chats[id].push({ from:'me', text });
+  saveState();
+  render();
+  const body = frame.querySelector('#chat-body');
+  if(body) body.scrollTop = body.scrollHeight;
+}
+
+function submitProfile(){
+  formErrors = {};
+  if(!draftProfile.name.trim()) formErrors.name = true;
+  if(!draftProfile.subrole) formErrors.subrole = true;
+  if(Object.keys(formErrors).length){ render(); return; }
+
+  const subLabels = (state.onboardRole==='designer') ? DESIGNER_CATS : WRITER_CATS;
+  const subroleLabel = draftProfile.subrole==='d' ? (draftProfile.subroleOther || 'Other') : subLabels[draftProfile.subrole];
+
+  const profile = {
+    photo: draftProfile.photo,
+    name: draftProfile.name.trim(),
+    penName: draftProfile.penName.trim() || draftProfile.name.trim(),
+    role: state.onboardRole,
+    subroleLabel,
+    handle: draftProfile.handle.trim(),
+    workNote: draftProfile.workNote.trim(),
+    bio: draftProfile.bio.trim(), // private — manager-only in a real deployment
+    worksCount: draftProfile.workNote.trim() ? 1 : 0,
+  };
+  setState({ profile, screen:'deal', dealOverlay:false });
+}
+
+render();
+
+/* ===== Premium 3D layer: tilt + vinyl (visual only) ===== */
+(function(){
+  try{
+    if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const fr = document.getElementById('frame'); if(!fr) return;
+    const SEL = '.who-opt,.card,.lesson-card,.reel-card';
+    const tilt = (e)=>{
+      const t = e.target.closest && e.target.closest(SEL); if(!t) return;
+      const r = t.getBoundingClientRect(), x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+      t.style.setProperty('--ry', ((x-.5)*8).toFixed(2)+'deg');
+      t.style.setProperty('--rx', ((.5-y)*8).toFixed(2)+'deg');
+      t.style.setProperty('--mx', (x*100).toFixed(1)+'%');
+      t.style.setProperty('--my', (y*100).toFixed(1)+'%');
+      t.classList.add('is-tilt');
+    };
+    const reset = (e)=>{
+      const t = e.target.closest && e.target.closest(SEL); if(!t) return;
+      t.style.setProperty('--rx','0deg'); t.style.setProperty('--ry','0deg'); t.classList.remove('is-tilt');
+    };
+    fr.addEventListener('pointermove', tilt);
+    fr.addEventListener('pointerdown', tilt);
+    fr.addEventListener('pointerout', reset);
+    fr.addEventListener('pointerup', reset);
+    fr.addEventListener('pointercancel', reset);
+    const addVinyl = ()=>{
+      const h = fr.querySelector('.onb-hero');
+      if(h && !h.querySelector('.vinyl')){ const v=document.createElement('div'); v.className='vinyl'; v.setAttribute('aria-hidden','true'); h.prepend(v); }
+    };
+    new MutationObserver(addVinyl).observe(fr,{childList:true});
+    addVinyl();
+  }catch(err){ console.warn('3D layer skipped', err); }
+})();
+</script>
+
+<script>
+/* ===== Create your own beat: opens the embedded "Creating Beats" page ===== */
+(function(){
+  var BEATS_HTML = "<!DOCTYPE html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n<title>Creating Beats<\/title>\n<link href=\"https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap\" rel=\"stylesheet\">\n<style>\n:root{--bg:#0b0b0d;--s1:#121215;--s2:#18181d;--ln:rgba(255,255,255,.07);--ln2:rgba(255,255,255,.16);--tx:#ecebe6;--mut:#7e7e89;--acc:#d4b06a;--acc2:#f0d79b;--lw:100px;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}\nhtml{scroll-padding-top:env(safe-area-inset-top,0px)}\n*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}\n[hidden]{display:none!important}\nbody{margin:0 auto;max-width:960px;background:var(--bg);color:var(--tx);font:500 14px/1.35 Manrope,system-ui,-apple-system,sans-serif;font-variant-numeric:tabular-nums}\nbutton{font:inherit;color:inherit;background:none;border:0;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none}\nbutton:active{opacity:.7}\nbutton:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}\nsvg{width:22px;height:22px;fill:currentColor;display:block;margin:auto}\nheader{padding:22px 18px 16px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}\nh1{margin:0;font:800 clamp(22px,6.4vw,30px)/1 Manrope,sans-serif;letter-spacing:-.03em}\n#sub{margin:0;font-size:12px;color:var(--mut);white-space:nowrap}\n.vz{position:relative;margin:0 12px;height:196px;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#14141a,#0d0d11);border:1px solid var(--ln)}\n#vc{width:100%;height:100%;display:block}\n#bass{position:absolute;right:16px;top:12px;font:800 11px/1 Manrope,sans-serif;letter-spacing:.16em;color:var(--acc);transform-origin:right top;pointer-events:none}\n.sk{padding:16px 18px 0}\n.sk input{width:100%}\n.tm{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-top:2px}\ninput[type=range]{-webkit-appearance:none;appearance:none;background:transparent;height:26px;margin:0;--p:0%}\ninput[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:3px;background:linear-gradient(90deg,var(--acc) var(--p),rgba(255,255,255,.14) var(--p))}\ninput[type=range]::-moz-range-track{height:3px;border-radius:3px;background:rgba(255,255,255,.14)}\ninput[type=range]::-moz-range-progress{height:3px;border-radius:3px;background:var(--acc)}\ninput[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;margin-top:-5.5px;border-radius:50%;border:0;background:var(--tx);box-shadow:0 1px 6px rgba(0,0,0,.6)}\ninput[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;border:0;background:var(--tx)}\n.tr{display:flex;align-items:center;justify-content:center;gap:clamp(18px,8vw,40px);padding:6px 0 18px}\n.tr button{width:44px;height:44px;border-radius:50%;color:var(--tx);border:1px solid var(--ln2)}\n#pl{width:64px;height:64px;border:0;background:var(--tx);color:#0b0b0d}\n#pl svg{width:26px;height:26px}\n#lp{color:var(--mut);border-color:var(--ln)}#lp.on{color:var(--acc);border-color:var(--acc)}\n.ins{margin:0 12px 12px;padding:14px 14px 12px;border-radius:14px;border:1px solid var(--ln);background:var(--s1);display:flex;flex-wrap:wrap;align-items:center;gap:10px 8px}\n.ins b{font-size:12px;font-weight:700;color:var(--mut)}\n.ins output{flex:1;text-align:right;font:800 26px/1 Manrope,sans-serif;letter-spacing:-.02em}\n.rg{display:flex;align-items:center;gap:10px;flex:1 1 100%}.rg input{flex:1;min-width:0}\n.sm{min-width:40px;height:36px;padding:0 14px;border-radius:9px;border:1px solid var(--ln2);font-weight:700;font-size:13px}\n#ky{border-color:var(--acc);color:var(--acc)}\n#cb{color:var(--mut);border-color:var(--ln)}\n.sc{margin:0 12px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.2) transparent;position:relative;border-radius:14px;border:1px solid var(--ln);background:var(--s1);-webkit-user-select:none;user-select:none}\n#st{position:relative;padding-bottom:8px}\n.row{display:flex;height:132px;margin-top:8px}\n.rl{height:26px;margin:0}\n.lb{position:sticky;left:0;z-index:4;flex:none;width:var(--lw);display:flex;flex-direction:column;justify-content:space-between;padding:6px 8px 6px 14px;background:var(--s1);box-shadow:inset 3px 0 0 var(--c,var(--acc)),8px 0 14px -4px rgba(0,0,0,.6);border-right:1px solid var(--ln)}\n.rl .lb{box-shadow:none;border:0}\n.pm{position:relative;text-align:left;font:700 11px/1.2 Manrope,sans-serif;color:var(--mut);padding:4px 16px 4px 7px;border-radius:7px;border:1px solid var(--ln)}\n.pm::after{content:\"\";position:absolute;right:6px;top:10px;border:3.5px solid transparent;border-top:4.5px solid currentColor}\n.pm u{display:block;text-decoration:none;color:var(--tx);font-size:13px;font-weight:800}\n.lb[data-a=main] .pm[data-k=main],.lb[data-a=vol] .pm[data-k=vol]{border-color:var(--acc);color:var(--acc)}\n.tt{text-align:center}\n.tt b{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;font-weight:800;cursor:pointer}\n.tt b::before{content:\"\";width:7px;height:7px;border-radius:50%;background:var(--c)}\n.tt small{display:block;font-size:10px;margin-top:3px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\n.tt button{margin-top:6px;font-size:11px;font-weight:700;color:var(--mut);padding:2px 0}\n.mu .tt b{opacity:.4;text-decoration:line-through}\n.lane{position:relative;flex:none;background:#0e0e12}\n.rl .lane{background:var(--s1)}\n.lane canvas{display:block}\n#rc{touch-action:none}\n.kf{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:2px;background:var(--acc2);border:2px solid #0b0b0d;box-shadow:0 0 0 1px var(--acc);transform:rotate(45deg);touch-action:none;z-index:2;cursor:grab}\n.kf::after{content:\"\";position:absolute;top:-16px;left:-16px;right:-16px;bottom:-16px}\n#ph{position:absolute;left:0;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--tx);z-index:3;pointer-events:none}\n#ph::before{content:\"\";position:absolute;top:0;left:-5px;border:6px solid transparent;border-top:8px solid var(--tx)}\n#adds{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 12px 0}\n.add{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:14px 4px 12px;border-radius:12px;border:1px solid var(--ln2);border-top:2px solid var(--c);background:var(--s1);cursor:pointer;text-align:center;overflow:hidden}\n.add svg{width:18px;height:18px;color:var(--c)}\n.add b{font-size:13px;font-weight:800}.add small{font-size:11px;color:var(--mut)}\n.add input{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}\n.add:active{background:var(--s2)}\n.msg{margin:10px 18px 0;min-height:16px;font-size:12px;color:var(--mut);text-align:center}.msg.err{color:#ee8a7a}\n.hint{margin:8px 18px 24px;font-size:11px;color:var(--mut);text-align:center;opacity:.8}\n.tp{position:fixed;z-index:9;padding:6px 11px;border-radius:8px;font-size:12px;font-weight:700;background:#000;border:1px solid var(--ln2);pointer-events:none;transform:translateX(-50%)}\n<\/style><\/head>\n<body>\n<header><h1>Creating Beats<\/h1><p id=sub><\/p><\/header>\n<div class=vz><canvas id=vc><\/canvas><b id=bass>BASS<\/b><\/div>\n<div class=sk><input id=sk type=range min=0 max=1000 value=0 aria-label=Seek><div class=tm><span id=cur>0:00<\/span><span id=tot>3:00<\/span><\/div><\/div>\n<div class=tr>\n<button id=lp aria-label=Loop><svg viewBox=\"0 0 24 24\"><path d=\"M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z\"/><\/svg><\/button>\n<button id=bk aria-label=\"Back 5 seconds\"><svg viewBox=\"0 0 24 24\"><path d=\"M11 6v12L2 12zM22 6v12l-9-6z\"/><\/svg><\/button>\n<button id=pl aria-label=\"Play or pause\"><svg viewBox=\"0 0 24 24\"><path d=\"M7 4l14 8-14 8z\"/><\/svg><\/button>\n<button id=fw aria-label=\"Forward 5 seconds\"><svg viewBox=\"0 0 24 24\"><path d=\"M13 6v12l9-6zM2 6v12l9-6z\"/><\/svg><\/button>\n<\/div>\n<div class=ins><b id=in1><\/b><output id=iv1><\/output><button id=cb class=sm hidden>Clear<\/button><button id=ky class=sm>Keyframe<\/button>\n<div class=rg><button id=mn class=sm>\u2212<\/button><input id=iv type=range><button id=pp class=sm>+<\/button><\/div><\/div>\n<div class=sc id=sc><div id=st>\n<div class=\"row rl\"><div class=lb><\/div><div class=lane><canvas id=rc><\/canvas><\/div><\/div>\n<div id=rows><\/div><div id=ph><\/div><\/div><\/div>\n<div id=adds><\/div>\n<p id=msg class=msg><\/p>\n<p class=hint>Tap a lane to place a keyframe \u00b7 drag to move \u00b7 double-tap to delete<\/p>\n\n<div id=tip class=tp hidden><\/div>\n<script>\nconst $=i=>document.getElementById(i),cp=(v,a,b)=>Math.min(b,Math.max(a,v));\nconst[vc,bass,sk,cur,tot,lp,bk,pl,fw,in1,iv1,cb,ky,mn,iv,pp,sc,st,rc,rows,adds,ph,tip,ts,msg,sub]='vc bass sk cur tot lp bk pl fw in1 iv1 cb ky mn iv pp sc st rc rows adds ph tip ts msg sub'.split(' ').map($);\nconst PPS=10,LW=96,HH=132,DPR=Math.min(2,devicePixelRatio||1),SC=[0,3,5,7,10,12,15,17];\nlet TOTAL=180,ctx,master,an,NB,playing=0,loop=0,T0=0,C0=0,tm,scr=null,ivd=0,hold=0,kfT=0,rq=0,sel,KP,SP,HP,ML,tt;\nconst PL='<svg viewBox=\"0 0 24 24\"><path d=\"M7 4l14 8-14 8z\"/><\/svg>',PA='<svg viewBox=\"0 0 24 24\"><path d=\"M6 4h4v16H6zM14 4h4v16h-4z\"/><\/svg>';\nconst fm=t=>{t=Math.floor(t);return(t/60|0)+':'+String(t%60).padStart(2,'0')};\nconst P=(n,lo,hi,d,f,s)=>({n,lo,hi,base:d,keys:[],f,st:s||.01});\nconst fB=v=>Math.round(v),fS=v=>v.toFixed(2)+'\u00d7',fV=v=>Math.round(v*100)+'%';\nconst rn=n=>Math.random()<n;\nfunction val(p,t){const k=p.keys;if(!k.length)return p.base;if(t<=k[0].t)return k[0].v;for(let i=1;i<k.length;i++)if(t<k[i].t){const a=k[i-1],b=k[i];return a.v+(b.v-a.v)*(t-a.t)/(b.t-a.t||1)}return k[k.length-1].v}\nconst vy=(p,v)=>14+(1-(v-p.lo)/(p.hi-p.lo))*(HH-28),yv=(p,y)=>{const v=p.lo+(1-(y-14)/(HH-28))*(p.hi-p.lo);return cp(Math.round(v/p.st)*p.st,p.lo,p.hi)};\n/* random beat + melody */\nfunction rollB(){KP=[];SP=[];HP=[];for(let i=0;i<16;i++){const sn=i==4||i==12;KP.push(i==0?1:sn?0:i==8?(rn(.8)?1:0):(rn(.22)?.85:0));SP.push(sn?1:(i%2&&rn(.1))?.35:0);HP.push(i%2?(rn(.55)?.35:0):i%4?.6:.9)}}\nfunction rollM(){ML=[];let n=2+(Math.random()*3|0);for(let i=0;i<16;i++){if(i&&rn(.28)){ML.push(-1);continue}n=cp(n+[-2,-1,0,1,2][Math.random()*5|0],0,7);ML.push(n)}}\n/* synth voices */\nconst ex=(g,w,v,d)=>{g.gain.setValueAtTime(v,w);g.gain.exponentialRampToValueAtTime(.001,w+d)};\nfunction kick(w,v,o){const s=ctx.createOscillator(),g=ctx.createGain();s.frequency.setValueAtTime(150,w);s.frequency.exponentialRampToValueAtTime(40,w+.14);ex(g,w,v,.38);s.connect(g);g.connect(o);s.start(w);s.stop(w+.4)}\nfunction nz(w,v,o,f,d){const s=ctx.createBufferSource(),h=ctx.createBiquadFilter(),g=ctx.createGain();s.buffer=NB;h.type='highpass';h.frequency.value=f;ex(g,w,v,d);s.connect(h);h.connect(g);g.connect(o);s.start(w);s.stop(w+d+.02)}\nfunction snare(w,v,o){nz(w,v*.8,o,1800,.18);const s=ctx.createOscillator(),g=ctx.createGain();s.type='triangle';s.frequency.value=190;ex(g,w,v*.5,.1);s.connect(g);g.connect(o);s.start(w);s.stop(w+.12)}\nconst hat=(w,v,o)=>nz(w,v*.35,o,7500,.045);\nfunction note(w,f,d,o){const s=ctx.createOscillator(),l=ctx.createBiquadFilter(),g=ctx.createGain();s.type='sawtooth';s.frequency.value=f;l.type='lowpass';l.frequency.setValueAtTime(2600,w);l.frequency.exponentialRampToValueAtTime(400,w+d);g.gain.setValueAtTime(.0001,w);g.gain.linearRampToValueAtTime(.28,w+.01);g.gain.exponentialRampToValueAtTime(.001,w+d);s.connect(l);l.connect(g);g.connect(o);s.start(w);s.stop(w+d+.02)}\n/* tracks: beat follows BPM; melody follows BPM x its own speed */\nconst tracks=[\n{kind:'beat',tag:'B-BEAT',col:'#e0715a',p:{main:P('BPM',40,200,100,fB,1),vol:P('Volume',0,1.5,.9,fV)},act:'main',dice:rollB,\ndur:t=>15/val(tracks[0].p.main,t),\nstep(i,w){const s=i%16;if(KP[s])kick(w,KP[s],this.g);if(SP[s])snare(w,SP[s],this.g);if(HP[s])hat(w,HP[s],this.g)}},\n{kind:'mel',tag:'MELODY',col:'#d4b06a',p:{main:P('Speed',.25,3,1,fS),vol:P('Volume',0,1.5,.7,fV)},act:'main',dice:rollM,\ndur:t=>30/val(tracks[0].p.main,t)/val(tracks[1].p.main,t),\nstep(i,w,d){const n=ML[i%16];if(n>=0)note(w,220*2**(SC[n]/12),Math.min(.6,d*1.7),this.g)}}];\n/* drum, snare and hit lanes: each has its own BPM, volume and keyframes */\nfunction tom(w,v,o){const s=ctx.createOscillator(),g=ctx.createGain();s.frequency.setValueAtTime(150,w);s.frequency.exponentialRampToValueAtTime(70,w+.22);ex(g,w,v*.95,.32);s.connect(g);g.connect(o);s.start(w);s.stop(w+.34)}\nfunction clap(w,v,o){nz(w,v*.5,o,1100,.05);nz(w+.012,v*.5,o,1100,.05);nz(w+.026,v*.75,o,1100,.2)}\nfunction hit(w,v,o){const s=ctx.createOscillator(),g=ctx.createGain();s.type='square';s.frequency.value=1650;ex(g,w,v*.16,.035);s.connect(g);g.connect(o);s.start(w);s.stop(w+.05);nz(w,v*.45,o,6000,.06)}\nconst rollD=()=>{const a=[];for(let i=0;i<16;i++)a.push(rn(i%4==2?0.5:i%2?0.18:0.28)?0.55+Math.random()*0.4:0);if(!a.some(Boolean))a[6]=0.8;return a};\nconst rollS=()=>{const a=[];for(let i=0;i<16;i++)a.push(i==4||i==12?1:(i%2&&rn(0.14))?0.4:0);return a};\nconst rollH=()=>{const a=[];for(let i=0;i<16;i++)a.push(i%2?(rn(0.3)?0.45:0):(rn(0.65)?0.75:0));if(!a.some(Boolean))a[2]=0.7;return a};\nfunction perc(tag,col,roll,voice){const tr={kind:'perc',tag,col,p:{main:P('BPM',40,200,100,fB,1),vol:P('Volume',0,1.5,.7,fV)},act:'main',pat:roll(),dice(){tr.pat=roll()},dur:t=>15/val(tr.p.main,t),step(i,w){const v=tr.pat[i%16];if(v)voice(w,v,tr.g)}};return tr}\ntracks.push(perc('DRUMS','#b58cf0',rollD,tom),perc('SNARE','#e6a35a',rollS,clap),perc('HITS','#6fb7d4',rollH,hit));\n/* audio engine */\nconst gv=(tr,t)=>tr.mu?0:val(tr.p.vol,t);\nconst integ=(tr,t0)=>{let p=0;for(let t=0;t<t0;t+=.02)p+=val(tr.p.main,t)*.02;return p};\nconst stopS=()=>tracks.forEach(t=>{if(t.src){try{t.src.stop()}catch(e){}t.src=null}});\nconst pt=()=>Math.min(playing?T0+Math.max(0,ctx.currentTime-C0):T0,TOTAL+1),ct=()=>scr!=null?scr:Math.min(pt(),TOTAL);\nconst gn=()=>{const g=ctx.createGain();g.connect(master);return g};\nfunction ac(){if(!ctx){ctx=new(window.AudioContext||window.webkitAudioContext)();master=ctx.createGain();master.gain.value=.9;const c=ctx.createDynamicsCompressor();an=ctx.createAnalyser();an.fftSize=256;an.smoothingTimeConstant=.6;master.connect(c);c.connect(an);an.connect(ctx.destination);NB=ctx.createBuffer(1,ctx.sampleRate,ctx.sampleRate);const d=NB.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;tracks.forEach(t=>{if(!t.g)t.g=gn()})}if(ctx.state!='running')ctx.resume()}\nfunction arm(tr){tr.nT=T0;tr.i=0;const g=tr.g.gain;g.cancelScheduledValues(0);g.value=gv(tr,T0);if(tr.buf){const pos=integ(tr,T0);if(pos<tr.buf.duration){const s=ctx.createBufferSource();s.buffer=tr.buf;s.playbackRate.value=Math.max(.05,val(tr.p.main,T0));s.connect(tr.g);s.start(C0,pos);tr.src=s}}}\nfunction go(t0){stopS();T0=t0;C0=ctx.currentTime+.06;playing=1;tracks.forEach(arm);clearInterval(tm);tm=setInterval(tick,25);tick();pl.innerHTML=PA;R()}\nfunction pause(){if(!playing)return;T0=Math.min(pt(),TOTAL);playing=0;clearInterval(tm);stopS();tracks.forEach(t=>t.g.gain.setTargetAtTime(0,ctx.currentTime,.015));pl.innerHTML=PL;R()}\nfunction tick(){const n=ctx.currentTime,t=pt();if(t>=TOTAL){if(loop)go(0);else{pause();T0=0;R()}return}\nfor(const tr of tracks){if(tr.step)while(tr.nT<TOTAL){const w=C0+tr.nT-T0;if(w>n+.12)break;const d=tr.dur(tr.nT);tr.step(tr.i++,Math.max(w,n),d);tr.nT+=d}\ntr.g.gain.setTargetAtTime(gv(tr,t),n,.02);if(tr.src)tr.src.playbackRate.setTargetAtTime(Math.max(.05,val(tr.p.main,t)),n,.02)}}\nfunction seek(t){t=cp(t,0,TOTAL);if(playing)go(t);else{T0=t;R()}}\npl.onclick=()=>{if(playing)pause();else{ac();go(T0>=TOTAL-.05?0:T0)}};\nbk.onclick=()=>seek(ct()-5);fw.onclick=()=>seek(ct()+5);\nlp.onclick=()=>{loop=!loop;lp.classList.toggle('on',loop)};\nsk.oninput=()=>{scr=sk.value/1000*TOTAL;R()};\nsk.onchange=()=>{const t=scr;scr=null;if(t!=null)seek(t)};\nconst rs=e=>{scr=cp((e.clientX-rc.getBoundingClientRect().left)/PPS,0,TOTAL);R()};\nrc.onpointerdown=e=>{rc.setPointerCapture(e.pointerId);rs(e)};\nrc.onpointermove=e=>{if(scr!=null)rs(e)};\nrc.onpointerup=rc.onpointercancel=()=>{if(scr!=null){const t=scr;scr=null;seek(t)}};\nsc.addEventListener('pointerdown',()=>hold=Date.now());\n/* keyframes + inspector */\nfunction ins(){const p=sel.tr.p[sel.k];in1.textContent=sel.tr.tag+' \u00b7 '+p.n;iv.min=p.lo;iv.max=p.hi;iv.step=p.st}\nfunction add(p,t,v){t=cp(t,0,TOTAL);const k=p.keys;if(!k.length&&t>.2)k.push({t:0,v:p.base});const e=k.find(q=>Math.abs(q.t-t)<.12);if(e)e.v=v;else k.push({t,v});k.sort((a,b)=>a.t-b.t)}\nconst ed=tr=>{lk(tr);draw(tr);R()};\nfunction pick(tr,k){tr.act=k;sel={tr,k};tr.lbl.dataset.a=k;ins();ed(tr)}\niv.onpointerdown=()=>ivd=1;iv.onpointerup=iv.onpointercancel=iv.onchange=()=>ivd=0;\niv.oninput=()=>{const{tr,k}=sel,p=tr.p[k];if(p.keys.length)add(p,ct(),+iv.value);else p.base=+iv.value;ed(tr)};\nconst nudge=d=>{const p=sel.tr.p[sel.k];iv.value=+iv.value+d*(p.st==1?1:.05);iv.oninput()};\nmn.onclick=()=>nudge(-1);pp.onclick=()=>nudge(1);\nky.onclick=()=>{const{tr,k}=sel,p=tr.p[k],t=ct();add(p,t,val(p,t));ed(tr)};\ncb.onclick=()=>{const{tr,k}=sel,p=tr.p[k];p.base=val(p,ct());p.keys=[];ed(tr)};\nfunction lk(tr){const p=tr.p[tr.act];[...tr.ln.querySelectorAll('.kf')].forEach(e=>{if(!p.keys.includes(e.k))e.remove()});p.keys.forEach(k=>{if(!k.el){k.el=document.createElement('i');k.el.className='kf';k.el.k=k}if(!k.el.isConnected)tr.ln.appendChild(k.el);k.el.style.left=k.t*PPS+'px';k.el.style.top=vy(p,k.v)+'px'})}\n/* lane rows */\nfunction mkRow(tr){const au=tr.kind=='aud',r=document.createElement('div');r.className='row';\nr.innerHTML=`<div class=lb data-a=main><button class=pm data-k=main>${tr.p.main.n}<u><\/u><\/button><div class=tt><b>${tr.tag}<\/b>${au?'<small><\/small>':''}<button class=ac>${au?'Remove':'Shuffle'}<\/button><\/div><button class=pm data-k=vol>Volume<u><\/u><\/button><\/div><div class=lane><canvas><\/canvas><\/div>`;\nr.style.setProperty('--c',tr.col);const u=r.querySelectorAll('u');Object.assign(tr,{row:r,lbl:r.firstChild,ln:r.lastChild,cv:r.querySelector('canvas'),u1:u[0],u2:u[1]});\nif(au)r.querySelector('small').textContent=tr.name;\nr.querySelectorAll('.pm').forEach(b=>b.onclick=()=>pick(tr,b.dataset.k));\nr.querySelector('.tt b').onclick=()=>{tr.mu=!tr.mu;tr.lbl.classList.toggle('mu',tr.mu);R()};\nr.querySelector('.ac').onclick=()=>{if(au)rmv(tr);else{tr.dice();draw(tr)}};\ntr.ln.onpointerdown=e=>{const el=e.target.closest('.kf');if(!el)return;const k=el.k,p=tr.p[tr.act],sx=e.clientX,sy=e.clientY;let mv=0;el.setPointerCapture(e.pointerId);sel={tr,k:tr.act};ins();\nconst m=ev=>{if(Math.hypot(ev.clientX-sx,ev.clientY-sy)>4)mv=1;if(!mv)return;const b=tr.ln.getBoundingClientRect();k.t=cp((ev.clientX-b.left)/PPS,0,TOTAL);k.v=yv(p,ev.clientY-b.top);p.keys.sort((a,b)=>a.t-b.t);tip.textContent=p.f(k.v)+' @ '+fm(k.t);tip.style.left=ev.clientX+'px';tip.style.top=ev.clientY-50+'px';tip.hidden=0;ed(tr)};\nconst up=()=>{el.removeEventListener('pointermove',m);el.removeEventListener('pointerup',up);el.removeEventListener('pointercancel',up);tip.hidden=1;kfT=Date.now();if(!mv){const n=Date.now();if(n-(k.lt||0)<350){p.keys.splice(p.keys.indexOf(k),1);el.remove()}else k.lt=n}ed(tr)};\nel.addEventListener('pointermove',m);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)};\ntr.ln.onclick=e=>{if(e.target.closest('.kf')||Date.now()-kfT<400)return;const p=tr.p[tr.act];add(p,e.offsetX/PPS,yv(p,e.offsetY));pick(tr,tr.act)};\nrows.appendChild(r)}\n[['beat','Beat','#8a94e6'],['melody','Melody','#8fbf7a'],['vocal','Vocal','#58b8b0']].forEach(([k,n,c])=>{const l=document.createElement('label');l.className='add';l.style.setProperty('--c',c);l.innerHTML=`<svg viewBox=\"0 0 24 24\"><path d=\"M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z\"/><\/svg><b>${n}<\/b><small>From device<\/small><input type=file accept=\"audio/*\">`;const i=l.lastChild;i.onclick=()=>{ac();watch(i)};i.onchange=()=>imp(i,k);adds.appendChild(l)});\n/* import audio files */\nconst dec=b=>new Promise((o,n)=>ctx.decodeAudioData(b,o,n));\nconst say=(m,e)=>{msg.textContent=m;msg.className='msg'+(e?' err':'')};\nfunction watch(i){if(/iP(hone|ad|od)/.test(navigator.userAgent))return;let ok=0;const f=()=>{ok=1};addEventListener('blur',f,{once:true});document.addEventListener('visibilitychange',f,{once:true});i.addEventListener('change',f,{once:true});setTimeout(()=>{if(!ok)say(\"Picker didn't open? Some in-app viewers block file access. Open this page in Chrome or Safari.\",1)},1800)}\nasync function imp(i,k){const fs=[...i.files];i.value='';for(const f of fs){try{ac();say('Loading '+f.name+'\u2026');const b=await dec(await f.arrayBuffer());addAud(f.name,b,k);say('Added '+f.name+' ('+fm(b.duration)+')')}catch(e){say(\"Couldn't decode \"+f.name+(f.type?' ('+f.type+')':'')+'. Try an MP3, M4A or WAV file.',1)}}}\nfunction peaks(b){const d=b.getChannelData(0),n=Math.ceil(b.duration*20),s=Math.max(1,Math.floor(d.length/n)),o=new Float32Array(n);for(let i=0;i<n;i++){let m=0;for(let j=i*s,e=Math.min(j+s,d.length);j<e;j++){const a=Math.abs(d[j]);if(a>m)m=a}o[i]=m}return o}\nfunction addAud(n,b,k){const tr={kind:'aud',tag:k.toUpperCase(),name:n.replace(/\\.[^.]+$/,''),buf:b,pk:peaks(b),col:{beat:'#8a94e6',melody:'#8fbf7a',vocal:'#58b8b0'}[k],p:{main:P('Speed',.25,3,1,fS),vol:P('Volume',0,1.5,1,fV)},act:'main',g:gn()};tracks.push(tr);mkRow(tr);layout();if(playing)go(ct())}\nfunction rmv(tr){try{tr.src&&tr.src.stop()}catch(e){}tr.g.disconnect();tracks.splice(tracks.indexOf(tr),1);tr.row.remove();if(sel.tr===tr)sel={tr:tracks[0],k:tracks[0].act};ins();layout()}\n/* drawing */\nfunction draw(tr){const c=tr.cv,W=TOTAL*PPS,x=c.getContext('2d'),p=tr.p[tr.act];x.setTransform(DPR,0,0,DPR,0,0);x.clearRect(0,0,W,HH);\nx.fillStyle='rgba(255,255,255,.05)';for(let s=0;s<=TOTAL;s+=10)x.fillRect(s*PPS,0,1,HH);\nlet end=W;x.fillStyle=tr.col;\nif(tr.buf){const pk=tr.pk,n=pk.length,D=tr.buf.duration;let q=0,px=0;for(;px<W;px++){q+=val(tr.p.main,px/PPS)/PPS;if(q>=D)break;const a=pk[Math.min(n-1,q/D*n|0)]*HH*.38;x.fillRect(px,HH/2-a,1,Math.max(1,a*2))}end=px}\nelse{let t=0,i=0;while(t<TOTAL){const d=tr.dur(t),X=t*PPS,s=i%16;\nif(tr.kind=='beat'){if(KP[s])x.fillRect(X,HH/2-24,2,48);if(SP[s]){x.globalAlpha=.55;x.fillRect(X,HH/2-12,2,24);x.globalAlpha=1}}\nelse if(tr.pat){const v=tr.pat[s];if(v){x.globalAlpha=.4+.6*v;x.fillRect(X,HH/2-8-v*20,2,16+v*40);x.globalAlpha=1}}else if(ML[s]>=0)x.fillRect(X,HH-26-ML[s]*(HH-52)/7,Math.max(2,d*PPS*.8),4);\nt+=d;i++}}\nx.globalCompositeOperation='destination-over';x.globalAlpha=.1;x.fillRect(0,8,end,HH-16);x.globalAlpha=.7;x.fillRect(0,8,end,2);x.globalAlpha=1;x.globalCompositeOperation='source-over';\nx.lineJoin='round';x.beginPath();\nif(!p.keys.length){x.setLineDash([5,5]);x.moveTo(0,vy(p,p.base));x.lineTo(W,vy(p,p.base))}\nelse{const k=p.keys;x.moveTo(0,vy(p,k[0].v));k.forEach(q=>x.lineTo(q.t*PPS,vy(p,q.v)));x.lineTo(W,vy(p,k[k.length-1].v))}\nx.strokeStyle='rgba(0,0,0,.5)';x.lineWidth=4;x.stroke();x.strokeStyle=p.keys.length?'#f0d79b':'rgba(236,235,230,.5)';x.lineWidth=1.5;x.stroke();x.setLineDash([])}\nfunction ruler(){const W=TOTAL*PPS,x=rc.getContext('2d');rc.width=W*DPR;rc.height=26*DPR;rc.style.width=W+'px';rc.style.height='26px';x.scale(DPR,DPR);x.fillStyle='#888';x.font='11px system-ui,sans-serif';for(let s=0;s<=TOTAL;s+=5){const m=s%10==0;x.fillRect(s*PPS,m?12:18,1,m?14:8);if(m)x.fillText(fm(s),s*PPS+3,10)}}\nfunction layout(){TOTAL=Math.max(180,...tracks.map(t=>t.buf?Math.ceil(t.buf.duration):0));const W=TOTAL*PPS;st.style.width=LW+W+'px';document.querySelectorAll('.lane').forEach(l=>l.style.width=W+'px');ruler();tracks.forEach(t=>{t.cv.width=W*DPR;t.cv.height=HH*DPR;t.cv.style.width=W+'px';t.cv.style.height=HH+'px';draw(t);lk(t)});tot.textContent=fm(TOTAL);T0=Math.min(T0,TOTAL);R()}\n/* LED visualizer */\nconst B=30,N=14,lv=Array(B).fill(0),pk=Array(B).fill(0);\nfunction viz(){const W=vc.clientWidth,H=vc.clientHeight;if(!W)return;if(vc.width!=W*DPR){vc.width=W*DPR;vc.height=H*DPR}\nconst x=vc.getContext('2d'),a=new Uint8Array(an?an.frequencyBinCount:128);x.setTransform(DPR,0,0,DPR,0,0);x.clearRect(0,0,W,H);if(playing&&an)an.getByteFrequencyData(a);\nconst m=14,bw=(W-m*2)/B,bh=(H-m-24)/N,g=2;\nfor(let i=0;i<B;i++){const v=a[Math.min(110,1+Math.floor((i/B)**1.7*80))]/255;lv[i]=Math.max(v,lv[i]-.045);pk[i]=Math.max(lv[i],pk[i]-.012);const n=Math.round(lv[i]*N),X=m+i*bw+g/2,w=bw-g;\nfor(let j=0;j<N;j++){x.fillStyle=j<n?(j<9?'#7ad7a2':j<12?'#e6c25a':'#ee6a5a'):'rgba(255,255,255,.045)';x.fillRect(X,H-m-(j+1)*bh+g/2,w,bh-g)}\nconst j=Math.min(N-1,Math.round(pk[i]*N));if(j>0){x.fillStyle='#ecebe6';x.fillRect(X,H-m-(j+1)*bh+g/2,w,2)}}\nbass.style.transform='scale('+(1+(a[0]+a[1]+a[2])/765*.25)+')'}\n/* refresh: playhead, labels, inspector, visualizer */\nfunction R(){cancelAnimationFrame(rq);const t=ct(),S=sel.tr,p=S.p[sel.k],x=LW+t*PPS;\nph.style.transform='translateX('+x+'px)';cur.textContent=fm(t);sub.textContent=Math.round(val(tracks[0].p.main,t))+' BPM \u00b7 A minor';if(scr==null)sk.value=t/TOTAL*1000;sk.style.setProperty('--p',t/TOTAL*100+'%');\nif(playing&&scr==null&&Date.now()-hold>2500&&(x<sc.scrollLeft+LW||x>sc.scrollLeft+sc.clientWidth-24))sc.scrollLeft=x-LW-24;\ntracks.forEach(r=>{r.u1.textContent=r.p.main.f(val(r.p.main,t));r.u2.textContent=r.p.vol.f(val(r.p.vol,t))});\nconst v=val(p,t);iv1.textContent=p.f(v);if(!ivd)iv.value=v;cb.hidden=!p.keys.length;iv.style.setProperty('--p',(v-p.lo)/(p.hi-p.lo)*100+'%');\nviz();if(playing||lv.some(q=>q>.01)||pk.some(q=>q>.01))rq=requestAnimationFrame(R)}\nrollB();rollM();tracks.forEach(mkRow);sel={tr:tracks[0],k:'main'};ins();layout();\n<\/script>\n<\/body><\/html>\n";
+  var fr = document.getElementById('frame');
+  var page = document.createElement('div');
+  page.id = 'beats-page';
+  page.innerHTML = '<div class="bp-bar"><button class="bp-back" aria-label="Back">&larr;</button><div class="bp-title">Create your own beat</div></div>';
+  document.body.appendChild(page);
+  function openBeats(){
+    if(page.querySelector('iframe')) return;
+    var f = document.createElement('iframe');
+    f.title = 'Creating Beats';
+    f.setAttribute('allow','autoplay');
+    f.srcdoc = BEATS_HTML;
+    page.appendChild(f);
+    page.classList.add('open');
+  }
+  function closeBeats(){
+    page.classList.remove('open');
+    var f = page.querySelector('iframe'); if(f) f.remove();
+  }
+  page.querySelector('.bp-back').addEventListener('click', closeBeats);
+  if(fr) fr.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-action="open-beats"]');
+    if(t) openBeats();
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeBeats(); });
+})();
+</script>
+</body>
+</html>
